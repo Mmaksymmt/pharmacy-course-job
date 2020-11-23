@@ -8,6 +8,8 @@ namespace Pharmacy
 {
     static class Program
     {
+        public static ApplicationContext Context { get; set; }
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -16,7 +18,8 @@ namespace Pharmacy
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            Context = new ApplicationContext(new LoginForm());
+            Application.Run(Context);
         }
     }
 }
