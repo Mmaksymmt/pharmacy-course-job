@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Pharmacy.SellerForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -113,7 +114,7 @@ namespace Pharmacy
         }
 
 
-        private void SalesDrugsGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        public void SaveChangesToDatabase()
         {
             salesDrugsAdapter.Update(salesDrugsDataTable);
 
@@ -129,6 +130,66 @@ namespace Pharmacy
             }
 
             connection_.Close();
+            FillData();
+        }
+
+
+        private void SalesDrugsGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            SaveChangesToDatabase();
+        }
+
+        
+        private void InsertButton_Click(object sender, EventArgs e)
+        {
+            var form = new SaleDrugInsertForm(currentSaleId_);
+            DialogResult res = form.ShowDialog();
+            FillData();
+        }
+
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            if (salesDrugsGridView.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            salesDrugsGridView.Rows.Remove(salesDrugsGridView.SelectedRows[0]);
+            SaveChangesToDatabase();
+        }
+
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            while (salesDrugsGridView.Rows.Count != 0)
+            {
+                salesDrugsGridView.Rows.Remove(salesDrugsGridView.Rows[0]);
+            }
+
+            SaveChangesToDatabase();
+            Close();
+        }
+
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            if (salesDrugsGridView.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            var selected =
+                (salesDrugsGridView.SelectedRows[0].DataBoundItem as DataRowView).Row;
+            int drugId = Convert.ToInt32(selected["drug_id"]);
+            var form = new SaleDrugEditForm(currentSaleId_, drugId);
+            form.ShowDialog();
             FillData();
         }
     }

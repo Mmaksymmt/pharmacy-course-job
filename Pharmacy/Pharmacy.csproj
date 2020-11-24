@@ -91,10 +91,10 @@
     <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditSaleForm.cs">
+    <Compile Include="SellerForms\EditSaleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditSaleForm.Designer.cs">
+    <Compile Include="SellerForms\EditSaleForm.Designer.cs">
       <DependentUpon>EditSaleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
@@ -113,13 +113,25 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SellerMainForm.cs">
+    <Compile Include="SellerForms\SaleDrugEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SellerMainForm.Designer.cs">
+    <Compile Include="SellerForms\SaleDrugEditForm.Designer.cs">
+      <DependentUpon>SaleDrugEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SellerForms\SaleDrugInsertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SellerForms\SaleDrugInsertForm.Designer.cs">
+      <DependentUpon>SaleDrugInsertForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SellerForms\SellerMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SellerForms\SellerMainForm.Designer.cs">
       <DependentUpon>SellerMainForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="EditSaleForm.resx">
+    <EmbeddedResource Include="SellerForms\EditSaleForm.resx">
       <DependentUpon>EditSaleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
@@ -134,7 +146,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SellerMainForm.resx">
+    <EmbeddedResource Include="SellerForms\SaleDrugEditForm.resx">
+      <DependentUpon>SaleDrugEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SellerForms\SaleDrugInsertForm.resx">
+      <DependentUpon>SaleDrugInsertForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SellerForms\SellerMainForm.resx">
       <DependentUpon>SellerMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
