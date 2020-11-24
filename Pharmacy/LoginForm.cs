@@ -66,22 +66,23 @@ namespace Pharmacy
                 return;
             }
 
-            // OK
+            //OK
 
-            //Form form;
+            Form form;
 
-            //if ((bool)sellers.Rows[0]["seller_admin"])
-            //{
-            //    form = new AdminMainForm((int)sellers.Rows[0]["seller_id"]);
-            //}
-            //else
-            //{
-            //    form = new SellerMainForm((int)sellers.Rows[0]["seller_id"]);
-            //}
+            if ((bool)sellers.Rows[0]["seller_admin"])
+            {
+                //form = new AdminMainForm((int)sellers.Rows[0]["seller_id"]);
+                form = new SellerMainForm((int)sellers.Rows[0]["seller_id"]);
+            }
+            else
+            {
+                form = new SellerMainForm((int)sellers.Rows[0]["seller_id"]);
+            }
 
-            //Program.Context.MainForm = form;
-            //Close();
-            //form.Show();
+            Program.Context.MainForm = form;
+            Close();
+            form.Show();
         }
     }
 }
