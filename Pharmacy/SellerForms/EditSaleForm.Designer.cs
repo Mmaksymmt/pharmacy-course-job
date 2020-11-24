@@ -46,6 +46,7 @@
             this.salesDrugsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.salesDrugsGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.salesDrugsGridView.Location = new System.Drawing.Point(12, 38);
+            this.salesDrugsGridView.MultiSelect = false;
             this.salesDrugsGridView.Name = "salesDrugsGridView";
             this.salesDrugsGridView.ReadOnly = true;
             this.salesDrugsGridView.RowHeadersVisible = false;

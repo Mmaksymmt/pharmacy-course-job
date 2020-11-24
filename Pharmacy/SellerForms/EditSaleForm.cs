@@ -38,6 +38,19 @@ namespace Pharmacy
         }
 
 
+        public EditSaleForm(int sellerId, int saleId)
+        {
+            InitializeComponent();
+            sellerId_ = sellerId;
+            currentSaleId_ = saleId;
+            salesdrugsBindingSource.DataSource = salesDrugsDataTable;
+            salesDrugsGridView.DataSource = salesdrugsBindingSource;
+
+            GetAdapter();
+            FillData();
+        }
+
+
         public void GetAdapter()
         {
             string fillTableQuery = $"SELECT salesdrugs.drug_id, drug_name, " +
@@ -134,6 +147,27 @@ namespace Pharmacy
         }
 
 
+        private void DeleteCurrentSale()
+        {
+            string query = $"DELETE FROM sales WHERE sale_id = {currentSaleId_};";
+            MySqlCommand command = new MySqlCommand(query, connection_);
+
+            try
+            {
+                connection_.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                FillData();
+            }
+
+            connection_.Close();
+            Close();
+        }
+
+
         private void SalesDrugsGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             SaveChangesToDatabase();
@@ -174,6 +208,7 @@ namespace Pharmacy
             }
 
             SaveChangesToDatabase();
+            DeleteCurrentSale();
             Close();
         }
 

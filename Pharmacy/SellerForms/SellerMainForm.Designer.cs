@@ -33,13 +33,15 @@
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.databaseBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pharmacyDataSet = new Pharmacy.pharmacyDataSet();
             this.продажиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addSaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.datatableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.salesGridView = new System.Windows.Forms.DataGridView();
+            this.addSaleButton = new System.Windows.Forms.Button();
+            this.editButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pharmacyDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datatableBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -74,16 +76,6 @@
             this.exitToolStripMenuItem.Text = "Вихід";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
-            // databaseBindingSource
-            // 
-            this.databaseBindingSource.DataMember = "sellers";
-            this.databaseBindingSource.DataSource = this.pharmacyDataSet;
-            // 
-            // pharmacyDataSet
-            // 
-            this.pharmacyDataSet.DataSetName = "pharmacyDataSet";
-            this.pharmacyDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // продажиToolStripMenuItem
             // 
             this.продажиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -95,23 +87,61 @@
             // addSaleToolStripMenuItem
             // 
             this.addSaleToolStripMenuItem.Name = "addSaleToolStripMenuItem";
-            this.addSaleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addSaleToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.addSaleToolStripMenuItem.Text = "Добавить продажу";
             this.addSaleToolStripMenuItem.Click += new System.EventHandler(this.AddSaleToolStripMenuItem_Click);
+            // 
+            // salesGridView
+            // 
+            this.salesGridView.AllowUserToAddRows = false;
+            this.salesGridView.AllowUserToDeleteRows = false;
+            this.salesGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.salesGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.salesGridView.Location = new System.Drawing.Point(12, 67);
+            this.salesGridView.MultiSelect = false;
+            this.salesGridView.Name = "salesGridView";
+            this.salesGridView.ReadOnly = true;
+            this.salesGridView.RowHeadersVisible = false;
+            this.salesGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.salesGridView.Size = new System.Drawing.Size(776, 317);
+            this.salesGridView.TabIndex = 1;
+            // 
+            // addSaleButton
+            // 
+            this.addSaleButton.Location = new System.Drawing.Point(54, 406);
+            this.addSaleButton.Name = "addSaleButton";
+            this.addSaleButton.Size = new System.Drawing.Size(75, 23);
+            this.addSaleButton.TabIndex = 2;
+            this.addSaleButton.Text = "Додати";
+            this.addSaleButton.UseVisualStyleBackColor = true;
+            this.addSaleButton.Click += new System.EventHandler(this.AddSaleToolStripMenuItem_Click);
+            // 
+            // editButton
+            // 
+            this.editButton.Location = new System.Drawing.Point(157, 406);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(75, 23);
+            this.editButton.TabIndex = 3;
+            this.editButton.Text = "Змінити";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // SellerMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.editButton);
+            this.Controls.Add(this.addSaleButton);
+            this.Controls.Add(this.salesGridView);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "SellerMainForm";
             this.Text = "Аптека (продавець)";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pharmacyDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datatableBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,9 +153,11 @@
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.BindingSource databaseBindingSource;
-        private pharmacyDataSet pharmacyDataSet;
+        private System.Windows.Forms.BindingSource datatableBindingSource;
         private System.Windows.Forms.ToolStripMenuItem продажиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addSaleToolStripMenuItem;
+        private System.Windows.Forms.DataGridView salesGridView;
+        private System.Windows.Forms.Button addSaleButton;
+        private System.Windows.Forms.Button editButton;
     }
 }
