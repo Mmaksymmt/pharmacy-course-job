@@ -39,14 +39,18 @@ namespace Pharmacy
                 return;
             }
 
-            string query = $"SELECT seller_id, seller_password, seller_admin " +
-                    $"FROM Sellers WHERE seller_id={id} AND seller_password=\"{passw}\"";
+            const string QUERY = "SELECT seller_id, seller_password, seller_admin " +
+                    "FROM Sellers WHERE seller_id=@seller_id AND " +
+                    "seller_password=@seller_password";
+            MySqlCommand command = new MySqlCommand(QUERY, connection_);
+            command.Parameters.AddWithValue("@seller_id", id);
+            command.Parameters.AddWithValue("@seller_password", passw);
             DataTable sellers = new DataTable();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
 
             try
             {
                 connection_.Open();
-                MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection_);
                 adapter.Fill(sellers);
             }
             catch (Exception ex)

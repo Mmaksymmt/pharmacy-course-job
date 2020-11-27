@@ -28,36 +28,30 @@ namespace Pharmacy.SellerForms
             InitializeComponent();
             saleId_ = saleId;
             drugId_ = drugId;
-            GetAdapter();
+            CreateAdapter();
             FillData();
         }
 
 
-        private void GetAdapter()
+        private void CreateAdapter()
         {
-            string query =
-                $"SELECT * FROM salesdrugs INNER JOIN drugs ON " +
-                $"drugs.drug_id=salesdrugs.drug_id WHERE salesdrugs.sale_id={saleId_} " +
-                $"AND salesdrugs.drug_id={drugId_};";
-
-            try
-            {
-                connection_.Open();
-                adapter_ = new MySqlDataAdapter(query, connection_);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-                Close();
-            }
-            connection_.Close();
+            const string QUERY =
+                "SELECT * FROM salesdrugs INNER JOIN drugs ON " +
+                "drugs.drug_id=salesdrugs.drug_id WHERE salesdrugs.sale_id=@sale_id " +
+                "AND salesdrugs.drug_id=@drug_id;";
+            MySqlCommand command = new MySqlCommand(QUERY, connection_);
+            command.Parameters.AddWithValue("@sale_id", saleId_);
+            command.Parameters.AddWithValue("@drug_id", drugId_);
+            adapter_ = new MySqlDataAdapter(command);
 
             // UPDATE query
 
-            string updateQuery =
-                $"UPDATE salesdrugs SET salesdrugs_amount = @sdAmount" +
-                $" WHERE sale_id = {saleId_} AND drug_id = {drugId_};";
-            MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection_);
+            const string UPDATE_QUERY =
+                "UPDATE salesdrugs SET salesdrugs_amount = @sdAmount" +
+                " WHERE sale_id = @sale_id AND drug_id = @drug_id;";
+            MySqlCommand updateCommand = new MySqlCommand(UPDATE_QUERY, connection_);
+            updateCommand.Parameters.AddWithValue("@sale_id", saleId_);
+            updateCommand.Parameters.AddWithValue("@drug_id", drugId_);
             var param = updateCommand.Parameters.Add(
                 "@sdAmount", MySqlDbType.Int32, 4, "salesdrugs_amount");
             adapter_.UpdateCommand = updateCommand;
@@ -81,7 +75,9 @@ namespace Pharmacy.SellerForms
 
             connection_.Close();
             nameLabel.Text = salesdrugsDt_.Rows[0]["drug_name"].ToString();
-            amountNumericUpDown.Maximum = Convert.ToInt32(salesdrugsDt_.Rows[0]["drug_amount"]);
+            amountNumericUpDown.Maximum =
+                Convert.ToInt32(salesdrugsDt_.Rows[0]["salesdrugs_amount"]) +
+                GetDrugsInStock();
             amountNumericUpDown.Minimum = 0;
             int salesDrugAmount = Convert.ToInt32(salesdrugsDt_.Rows[0]["salesdrugs_amount"]);
             amountNumericUpDown.Value =
@@ -93,6 +89,32 @@ namespace Pharmacy.SellerForms
                 Convert.ToDecimal(salesdrugsDt_.Rows[0]["drug_price"]).ToString();
             inStockValueLabel.Text = amountNumericUpDown.Maximum.ToString();
             saveButton.Enabled = true;
+        }
+
+
+        private int GetDrugsInStock()
+        {
+            const string QUERY = "SELECT drug_amount FROM drugs WHERE drug_id=@drug_id";
+            MySqlCommand command = new MySqlCommand(QUERY, connection_);
+            command.Parameters.AddWithValue("@drug_id", drugId_);
+            MySqlDataReader reader;
+            int inStockValue;
+
+            try
+            {
+                connection_.Open();
+                reader = command.ExecuteReader();
+                reader.Read();
+                inStockValue = Convert.ToInt32(reader.GetValue(0)); ;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                throw;
+            }
+
+            connection_.Close();
+            return inStockValue;
         }
 
 
@@ -110,5 +132,3 @@ namespace Pharmacy.SellerForms
         }
     }
 }
-
-// TODO: fix drugs amount display

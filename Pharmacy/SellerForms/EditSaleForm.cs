@@ -33,7 +33,7 @@ namespace Pharmacy
             salesDrugsGridView.DataSource = salesdrugsBindingSource;
 
             InsertSale();
-            GetAdapter();
+            CreateAdapter();
             FillData();
         }
 
@@ -46,37 +46,28 @@ namespace Pharmacy
             salesdrugsBindingSource.DataSource = salesDrugsDataTable;
             salesDrugsGridView.DataSource = salesdrugsBindingSource;
 
-            GetAdapter();
+            CreateAdapter();
             FillData();
         }
 
 
-        public void GetAdapter()
+        public void CreateAdapter()
         {
-            string fillTableQuery = $"SELECT salesdrugs.drug_id, drug_name, " +
-                $"salesdrugs_amount, salesdrugs_price, " +
-                $"salesdrugs_price * salesdrugs_amount AS sum_price " +
-                $"FROM salesdrugs INNER JOIN drugs WHERE " +
-                $"sale_id={currentSaleId_} AND drugs.drug_id=salesdrugs.drug_id;";
-
-            try
-            {
-                connection_.Open();
-                salesDrugsAdapter = new MySqlDataAdapter(fillTableQuery, connection_);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-                throw;
-            }
-
-            connection_.Close();
+            const string FILL_TABLE_QUERY = "SELECT salesdrugs.drug_id, drug_name, " +
+                "salesdrugs_amount, salesdrugs_price, " +
+                "salesdrugs_price * salesdrugs_amount AS sum_price " +
+                "FROM salesdrugs INNER JOIN drugs WHERE " +
+                "sale_id=@sale_id AND drugs.drug_id=salesdrugs.drug_id;";
+            MySqlCommand fillTableCommand = new MySqlCommand(FILL_TABLE_QUERY, connection_);
+            fillTableCommand.Parameters.AddWithValue("@sale_id", currentSaleId_);
+            salesDrugsAdapter = new MySqlDataAdapter(fillTableCommand);
 
             // DELETE command
 
-            string deleteQuery = $"DELETE FROM salesdrugs WHERE sale_id = {currentSaleId_}" +
-                $" AND drug_id = @drug_id"; ;
-            MySqlCommand deleteCommand = new MySqlCommand(deleteQuery, connection_);
+            const string DELETE_QUERY = "DELETE FROM salesdrugs WHERE sale_id = @sale_id" +
+                " AND drug_id = @drug_id"; ;
+            MySqlCommand deleteCommand = new MySqlCommand(DELETE_QUERY, connection_);
+            deleteCommand.Parameters.AddWithValue("@sale_id", currentSaleId_);
             var param = 
                 deleteCommand.Parameters.Add("@drug_id", MySqlDbType.Int32, 4, "drug_id");
             param.SourceVersion = DataRowVersion.Original;

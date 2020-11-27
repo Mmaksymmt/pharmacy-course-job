@@ -87,8 +87,8 @@
             // addSaleToolStripMenuItem
             // 
             this.addSaleToolStripMenuItem.Name = "addSaleToolStripMenuItem";
-            this.addSaleToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.addSaleToolStripMenuItem.Text = "Добавить продажу";
+            this.addSaleToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.addSaleToolStripMenuItem.Text = "Додати продаж";
             this.addSaleToolStripMenuItem.Click += new System.EventHandler(this.AddSaleToolStripMenuItem_Click);
             // 
             // salesGridView

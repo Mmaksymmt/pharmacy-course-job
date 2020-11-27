@@ -28,17 +28,19 @@ namespace Pharmacy
             sellerId_ = sellerId;
             datatableBindingSource.DataSource = salesDt_;
             salesGridView.DataSource = datatableBindingSource;
-            GetAdapter();
+            CreateAdapter();
             FillData();
         }
 
 
-        private void GetAdapter()
+        private void CreateAdapter()
         {
-            string query = $"SELECT sale_id, sale_date FROM sales " +
-                $"WHERE sale_seller_id = {sellerId_} " +
-                $"AND DATE(sale_date) = CURRENT_DATE() ORDER BY sale_date DESC;";
-            adapter_ = new MySqlDataAdapter(query, connection_);
+            const string QUERY = "SELECT sale_id, sale_date FROM sales " +
+                "WHERE sale_seller_id = @sale_seller_id " +
+                "AND DATE(sale_date) = CURRENT_DATE() ORDER BY sale_date DESC;";
+            MySqlCommand command = new MySqlCommand(QUERY, connection_);
+            command.Parameters.AddWithValue("@sale_seller_id", sellerId_);
+            adapter_ = new MySqlDataAdapter(command);
         }
 
 
