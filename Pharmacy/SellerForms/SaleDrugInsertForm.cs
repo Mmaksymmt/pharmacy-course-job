@@ -25,33 +25,53 @@ namespace Pharmacy
         public SaleDrugInsertForm(int saleId)
         {
             InitializeComponent();
+            dataTableBindingSource.DataSource = drugsDt_;
+            drugsGridView.DataSource = dataTableBindingSource;
             currentSaleId_ = saleId;
-            nameComboBox.SelectedItem = null;
             FillCategories();
+            FillTable();
+            categoryComboBox.SelectedItem = null;
         }
 
 
-        private void FillDrugs()
+        private void FillTable()
         {
-            drugsDt_.Clear();
-            if (categoryComboBox.SelectedItem == null)
+            DataRow categoryRow = (categoryComboBox.SelectedItem as DataRowView)?.Row;
+            string query;
+            MySqlCommand command = new MySqlCommand() { Connection = connection_ };
+
+            if (categoryRow == null)
             {
-                return;
+                query = "SELECT drug_id, drug_name, drugcategories.category_name, drug_form, " +
+                    "drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                    "FROM drugs INNER JOIN drugcategories " +
+                    "ON drugs.drug_category_id = drugcategories.category_id " +
+                    "WHERE LOCATE(@name_filter, drug_name) > 0 " +
+                    "AND drug_id NOT IN " +
+                    "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id);";
+            }
+            else
+            {
+                query = "SELECT drug_id, drug_name, drugcategories.category_name, drug_form, " +
+                    "drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                    "FROM drugs INNER JOIN drugcategories " +
+                    "ON drugs.drug_category_id = drugcategories.category_id " +
+                    "WHERE LOCATE(@name_filter, drug_name) > 0 " +
+                    "AND drug_category_id = @category_id AND drug_id NOT IN " +
+                    "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id);";
+                int categoryId = Convert.ToInt32(categoryRow["category_id"]);
+                command.Parameters.AddWithValue("@category_id", categoryId);
             }
 
-            int categoryId =
-                (Convert.ToInt32((categoryComboBox.SelectedItem as DataRowView)
-                .Row["category_id"]));
-            string query =
-                $"SELECT * FROM drugs WHERE drug_category_id={categoryId} " +
-                $"AND drug_id NOT IN " +
-                $"(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = {currentSaleId_});";
-            MySqlDataAdapter adapter;
+            command.Parameters.AddWithValue("@sale_id", currentSaleId_);
+            command.Parameters.AddWithValue("@name_filter", nameTextBox.Text);
+            command.CommandText = query;
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            drugsDt_.Rows.Clear();
 
             try
             {
                 connection_.Open();
-                adapter = new MySqlDataAdapter(query, connection_);
                 adapter.Fill(drugsDt_);
             }
             catch (Exception ex)
@@ -61,9 +81,6 @@ namespace Pharmacy
             }
 
             connection_.Close();
-            nameComboBox.ValueMember = "drug_id";
-            nameComboBox.DisplayMember = "drug_name";
-            nameComboBox.DataSource = drugsDt_;
         }
 
 
@@ -89,42 +106,44 @@ namespace Pharmacy
             categoryComboBox.DisplayMember = "category_name";
             categoryComboBox.ValueMember = "category_id";
             categoryComboBox.DataSource = categoriesDt_;
+            categoryComboBox.SelectedItem = null;
         }
 
 
-        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private DataRow GetSelectedDrugRow()
         {
-            FillDrugs();
-        }
-
-
-        private void NameComboBox_SelectedValueChanged(object sender, EventArgs e)
-        {
-            DataRow selected = (nameComboBox.SelectedItem as DataRowView)?.Row;
-            if (nameComboBox.SelectedItem == null)
+            if (drugsGridView.SelectedRows.Count == 0)
             {
-                amountNumericUpDown.Value = 0;
-                amountNumericUpDown.Enabled = false;
+                return null;
+            }
+
+            return (drugsGridView.SelectedRows[0].DataBoundItem as DataRowView).Row;
+        }
+
+
+        private void UpdatePriceLabel()
+        {
+            DataRow selected = GetSelectedDrugRow();
+
+            if (selected == null)
+            {
                 priceValueLabel.Text = string.Empty;
-                inStockValueLabel.Text = string.Empty;
-                saveButton.Enabled = false;
+                return;
             }
-            else
-            {
-                amountNumericUpDown.Maximum = Convert.ToInt32(selected["drug_amount"]);
-                amountNumericUpDown.Minimum = 0;
-                amountNumericUpDown.Value = amountNumericUpDown.Maximum == 0 ? 0 : 1;
-                amountNumericUpDown.Enabled = true;
-                priceValueLabel.Text = Convert.ToDecimal(selected["drug_price"]).ToString();
-                inStockValueLabel.Text = amountNumericUpDown.Maximum.ToString();
-                saveButton.Enabled = true;
-            }
+
+            decimal priceForOne = Convert.ToDecimal(selected["drug_price"]);
+            priceValueLabel.Text = (amountNumericUpDown.Value * priceForOne).ToString();
         }
 
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            DataRow selected = (nameComboBox.SelectedItem as DataRowView).Row;
+            if (GetSelectedDrugRow() == null)
+            {
+                return;
+            }
+
+            DataRow selected = GetSelectedDrugRow();
             string query = $"INSERT INTO salesdrugs (sale_id, drug_id, salesdrugs_amount) " +
                 $"VALUES ({currentSaleId_}, {selected["drug_id"]}, {amountNumericUpDown.Value});";
             MySqlCommand command = new MySqlCommand(query, connection_);
@@ -148,6 +167,60 @@ namespace Pharmacy
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            FillTable();
+        }
+
+
+        private void DrugsGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (GetSelectedDrugRow() == null)
+            {
+                priceValueLabel.Text = string.Empty;
+                amountNumericUpDown.Minimum = 0;
+                amountNumericUpDown.Maximum = 0;
+                amountNumericUpDown.Value = 0;
+                inStockValueLabel.Text = string.Empty;
+                amountNumericUpDown.Enabled = false;
+                saveButton.Enabled = false;
+            }
+            else
+            {
+                DataRow selected = GetSelectedDrugRow();
+                int inStockAmount = Convert.ToInt32(selected["drug_amount"]);
+                int price = Convert.ToInt32(selected["drug_price"]);
+                
+                if (inStockAmount == 0)
+                {
+                    amountNumericUpDown.Minimum = 0;
+                    amountNumericUpDown.Maximum = 0;
+                    amountNumericUpDown.Value = 0;
+                    inStockValueLabel.Text = "0";
+                    amountNumericUpDown.Enabled = false;
+                    saveButton.Enabled = false;
+                }
+                else
+                {
+                    amountNumericUpDown.Maximum = inStockAmount;
+                    amountNumericUpDown.Minimum = 1;
+                    amountNumericUpDown.Value = 1;
+                    inStockValueLabel.Text = inStockAmount.ToString();
+                    amountNumericUpDown.Enabled = true;
+                    saveButton.Enabled = true;
+                }
+            }
+
+            UpdatePriceLabel();
+        }
+
+
+        private void AmountNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            UpdatePriceLabel();
         }
     }
 }

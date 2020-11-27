@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.nameComboBox = new System.Windows.Forms.ComboBox();
             this.categoryLabel = new System.Windows.Forms.Label();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
             this.priceLabel = new System.Windows.Forms.Label();
@@ -40,32 +40,32 @@
             this.slashLabel = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.drugsGridView = new System.Windows.Forms.DataGridView();
+            this.dataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.searchButton = new System.Windows.Forms.Button();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.searchGroupBox = new System.Windows.Forms.GroupBox();
+            this.paramsGroupBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTableBindingSource)).BeginInit();
+            this.searchGroupBox.SuspendLayout();
+            this.paramsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(23, 94);
+            this.nameLabel.Location = new System.Drawing.Point(14, 39);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(64, 13);
             this.nameLabel.TabIndex = 0;
             this.nameLabel.Text = "Назва ліків";
             // 
-            // nameComboBox
-            // 
-            this.nameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.nameComboBox.FormattingEnabled = true;
-            this.nameComboBox.Location = new System.Drawing.Point(114, 94);
-            this.nameComboBox.Name = "nameComboBox";
-            this.nameComboBox.Size = new System.Drawing.Size(121, 21);
-            this.nameComboBox.TabIndex = 1;
-            this.nameComboBox.SelectedValueChanged += new System.EventHandler(this.NameComboBox_SelectedValueChanged);
-            // 
             // categoryLabel
             // 
             this.categoryLabel.AutoSize = true;
-            this.categoryLabel.Location = new System.Drawing.Point(23, 50);
+            this.categoryLabel.Location = new System.Drawing.Point(14, 84);
             this.categoryLabel.Name = "categoryLabel";
             this.categoryLabel.Size = new System.Drawing.Size(56, 13);
             this.categoryLabel.TabIndex = 2;
@@ -73,18 +73,16 @@
             // 
             // categoryComboBox
             // 
-            this.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryComboBox.FormattingEnabled = true;
-            this.categoryComboBox.Location = new System.Drawing.Point(114, 47);
+            this.categoryComboBox.Location = new System.Drawing.Point(88, 81);
             this.categoryComboBox.Name = "categoryComboBox";
-            this.categoryComboBox.Size = new System.Drawing.Size(121, 21);
+            this.categoryComboBox.Size = new System.Drawing.Size(230, 21);
             this.categoryComboBox.TabIndex = 3;
-            this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // priceLabel
             // 
             this.priceLabel.AutoSize = true;
-            this.priceLabel.Location = new System.Drawing.Point(23, 149);
+            this.priceLabel.Location = new System.Drawing.Point(31, 31);
             this.priceLabel.Name = "priceLabel";
             this.priceLabel.Size = new System.Drawing.Size(29, 13);
             this.priceLabel.TabIndex = 4;
@@ -94,16 +92,16 @@
             // 
             this.priceValueLabel.AutoSize = true;
             this.priceValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.priceValueLabel.Location = new System.Drawing.Point(110, 144);
+            this.priceValueLabel.Location = new System.Drawing.Point(118, 26);
             this.priceValueLabel.Name = "priceValueLabel";
-            this.priceValueLabel.Size = new System.Drawing.Size(104, 20);
+            this.priceValueLabel.Size = new System.Drawing.Size(125, 20);
             this.priceValueLabel.TabIndex = 5;
-            this.priceValueLabel.Text = "Назва ліків";
+            this.priceValueLabel.Text = "amount * price";
             // 
             // amountLabel
             // 
             this.amountLabel.AutoSize = true;
-            this.amountLabel.Location = new System.Drawing.Point(23, 194);
+            this.amountLabel.Location = new System.Drawing.Point(31, 76);
             this.amountLabel.Name = "amountLabel";
             this.amountLabel.Size = new System.Drawing.Size(53, 13);
             this.amountLabel.TabIndex = 6;
@@ -111,15 +109,16 @@
             // 
             // amountNumericUpDown
             // 
-            this.amountNumericUpDown.Location = new System.Drawing.Point(114, 192);
+            this.amountNumericUpDown.Location = new System.Drawing.Point(122, 74);
             this.amountNumericUpDown.Name = "amountNumericUpDown";
             this.amountNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.amountNumericUpDown.TabIndex = 7;
+            this.amountNumericUpDown.ValueChanged += new System.EventHandler(this.AmountNumericUpDown_ValueChanged);
             // 
             // inStockValueLabel
             // 
             this.inStockValueLabel.AutoSize = true;
-            this.inStockValueLabel.Location = new System.Drawing.Point(257, 194);
+            this.inStockValueLabel.Location = new System.Drawing.Point(265, 76);
             this.inStockValueLabel.Name = "inStockValueLabel";
             this.inStockValueLabel.Size = new System.Drawing.Size(53, 13);
             this.inStockValueLabel.TabIndex = 8;
@@ -128,7 +127,7 @@
             // slashLabel
             // 
             this.slashLabel.AutoSize = true;
-            this.slashLabel.Location = new System.Drawing.Point(240, 194);
+            this.slashLabel.Location = new System.Drawing.Point(248, 76);
             this.slashLabel.Name = "slashLabel";
             this.slashLabel.Size = new System.Drawing.Size(12, 13);
             this.slashLabel.TabIndex = 9;
@@ -136,7 +135,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(68, 309);
+            this.saveButton.Location = new System.Drawing.Point(64, 341);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 10;
@@ -146,7 +145,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(235, 309);
+            this.cancelButton.Location = new System.Drawing.Point(214, 341);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 11;
@@ -154,35 +153,92 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // drugsGridView
+            // 
+            this.drugsGridView.AllowUserToAddRows = false;
+            this.drugsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.drugsGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.drugsGridView.Location = new System.Drawing.Point(370, 47);
+            this.drugsGridView.MultiSelect = false;
+            this.drugsGridView.Name = "drugsGridView";
+            this.drugsGridView.ReadOnly = true;
+            this.drugsGridView.RowHeadersVisible = false;
+            this.drugsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.drugsGridView.Size = new System.Drawing.Size(581, 317);
+            this.drugsGridView.TabIndex = 12;
+            this.drugsGridView.SelectionChanged += new System.EventHandler(this.DrugsGridView_SelectionChanged);
+            // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(115, 121);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.TabIndex = 13;
+            this.searchButton.Text = "Шукати";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Location = new System.Drawing.Point(88, 36);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(230, 20);
+            this.nameTextBox.TabIndex = 14;
+            // 
+            // searchGroupBox
+            // 
+            this.searchGroupBox.Controls.Add(this.nameLabel);
+            this.searchGroupBox.Controls.Add(this.searchButton);
+            this.searchGroupBox.Controls.Add(this.nameTextBox);
+            this.searchGroupBox.Controls.Add(this.categoryLabel);
+            this.searchGroupBox.Controls.Add(this.categoryComboBox);
+            this.searchGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.searchGroupBox.Name = "searchGroupBox";
+            this.searchGroupBox.Size = new System.Drawing.Size(335, 150);
+            this.searchGroupBox.TabIndex = 15;
+            this.searchGroupBox.TabStop = false;
+            this.searchGroupBox.Text = "Пошук";
+            // 
+            // paramsGroupBox
+            // 
+            this.paramsGroupBox.Controls.Add(this.amountNumericUpDown);
+            this.paramsGroupBox.Controls.Add(this.priceLabel);
+            this.paramsGroupBox.Controls.Add(this.priceValueLabel);
+            this.paramsGroupBox.Controls.Add(this.amountLabel);
+            this.paramsGroupBox.Controls.Add(this.inStockValueLabel);
+            this.paramsGroupBox.Controls.Add(this.slashLabel);
+            this.paramsGroupBox.Location = new System.Drawing.Point(12, 184);
+            this.paramsGroupBox.Name = "paramsGroupBox";
+            this.paramsGroupBox.Size = new System.Drawing.Size(335, 100);
+            this.paramsGroupBox.TabIndex = 16;
+            this.paramsGroupBox.TabStop = false;
+            // 
             // SaleDrugInsertForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 450);
+            this.ClientSize = new System.Drawing.Size(978, 421);
+            this.Controls.Add(this.paramsGroupBox);
+            this.Controls.Add(this.searchGroupBox);
+            this.Controls.Add(this.drugsGridView);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.slashLabel);
-            this.Controls.Add(this.inStockValueLabel);
-            this.Controls.Add(this.amountNumericUpDown);
-            this.Controls.Add(this.amountLabel);
-            this.Controls.Add(this.priceValueLabel);
-            this.Controls.Add(this.priceLabel);
-            this.Controls.Add(this.categoryComboBox);
-            this.Controls.Add(this.categoryLabel);
-            this.Controls.Add(this.nameComboBox);
-            this.Controls.Add(this.nameLabel);
             this.Name = "SaleDrugInsertForm";
             this.Text = "SaleDrugEditForm";
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTableBindingSource)).EndInit();
+            this.searchGroupBox.ResumeLayout(false);
+            this.searchGroupBox.PerformLayout();
+            this.paramsGroupBox.ResumeLayout(false);
+            this.paramsGroupBox.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.ComboBox nameComboBox;
         private System.Windows.Forms.Label categoryLabel;
         private System.Windows.Forms.ComboBox categoryComboBox;
         private System.Windows.Forms.Label priceLabel;
@@ -193,5 +249,11 @@
         private System.Windows.Forms.Label slashLabel;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.DataGridView drugsGridView;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.BindingSource dataTableBindingSource;
+        private System.Windows.Forms.GroupBox searchGroupBox;
+        private System.Windows.Forms.GroupBox paramsGroupBox;
     }
 }

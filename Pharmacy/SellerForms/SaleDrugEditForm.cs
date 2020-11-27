@@ -21,6 +21,8 @@ namespace Pharmacy.SellerForms
         private DataTable salesdrugsDt_ = new DataTable();
         private int saleId_;
         private int drugId_;
+        private decimal price_;
+
 
 
         public SaleDrugEditForm(int saleId, int drugId)
@@ -85,10 +87,11 @@ namespace Pharmacy.SellerForms
                 ? amountNumericUpDown.Maximum
                 : salesDrugAmount;
             amountNumericUpDown.Enabled = true;
-            priceValueLabel.Text =
-                Convert.ToDecimal(salesdrugsDt_.Rows[0]["drug_price"]).ToString();
+            price_ = Convert.ToDecimal(salesdrugsDt_.Rows[0]["drug_price"]);
+            priceValueLabel.Text = price_.ToString();
             inStockValueLabel.Text = amountNumericUpDown.Maximum.ToString();
             saveButton.Enabled = true;
+            totalCostValueLabel.Text = (amountNumericUpDown.Value * price_).ToString();
         }
 
 
@@ -129,6 +132,12 @@ namespace Pharmacy.SellerForms
             salesdrugsDt_.Rows[0]["salesdrugs_amount"] = amountNumericUpDown.Value;
             adapter_.Update(salesdrugsDt_);
             Close();
+        }
+
+
+        private void AmountNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            totalCostValueLabel.Text = (amountNumericUpDown.Value * price_).ToString();
         }
     }
 }

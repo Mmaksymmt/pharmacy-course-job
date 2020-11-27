@@ -37,12 +37,14 @@
             this.priceValueLabel = new System.Windows.Forms.Label();
             this.priceLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
+            this.totalCostValueLabel = new System.Windows.Forms.Label();
+            this.totalCostLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(228, 199);
+            this.cancelButton.Location = new System.Drawing.Point(223, 240);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 19;
@@ -52,7 +54,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(70, 199);
+            this.saveButton.Location = new System.Drawing.Point(67, 240);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 18;
@@ -84,6 +86,7 @@
             this.amountNumericUpDown.Name = "amountNumericUpDown";
             this.amountNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.amountNumericUpDown.TabIndex = 15;
+            this.amountNumericUpDown.ValueChanged += new System.EventHandler(this.AmountNumericUpDown_ValueChanged);
             // 
             // amountLabel
             // 
@@ -97,12 +100,12 @@
             // priceValueLabel
             // 
             this.priceValueLabel.AutoSize = true;
-            this.priceValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.priceValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.priceValueLabel.Location = new System.Drawing.Point(112, 56);
             this.priceValueLabel.Name = "priceValueLabel";
-            this.priceValueLabel.Size = new System.Drawing.Size(104, 20);
+            this.priceValueLabel.Size = new System.Drawing.Size(43, 20);
             this.priceValueLabel.TabIndex = 13;
-            this.priceValueLabel.Text = "Назва ліків";
+            this.priceValueLabel.Text = "price";
             // 
             // priceLabel
             // 
@@ -123,11 +126,32 @@
             this.nameLabel.TabIndex = 20;
             this.nameLabel.Text = "Назва ліків";
             // 
+            // totalCostValueLabel
+            // 
+            this.totalCostValueLabel.AutoSize = true;
+            this.totalCostValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.totalCostValueLabel.Location = new System.Drawing.Point(113, 156);
+            this.totalCostValueLabel.Name = "totalCostValueLabel";
+            this.totalCostValueLabel.Size = new System.Drawing.Size(84, 20);
+            this.totalCostValueLabel.TabIndex = 22;
+            this.totalCostValueLabel.Text = "total cost";
+            // 
+            // totalCostLabel
+            // 
+            this.totalCostLabel.AutoSize = true;
+            this.totalCostLabel.Location = new System.Drawing.Point(26, 161);
+            this.totalCostLabel.Name = "totalCostLabel";
+            this.totalCostLabel.Size = new System.Drawing.Size(46, 13);
+            this.totalCostLabel.TabIndex = 21;
+            this.totalCostLabel.Text = "Всього:";
+            // 
             // SaleDrugEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(359, 314);
+            this.Controls.Add(this.totalCostValueLabel);
+            this.Controls.Add(this.totalCostLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
@@ -156,5 +180,7 @@
         private System.Windows.Forms.Label priceValueLabel;
         private System.Windows.Forms.Label priceLabel;
         private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label totalCostValueLabel;
+        private System.Windows.Forms.Label totalCostLabel;
     }
 }
