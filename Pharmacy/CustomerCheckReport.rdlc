@@ -6,19 +6,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.14854cm</Width>
+              <Width>2.29268cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.14854cm</Width>
+              <Width>5.14072cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.14854cm</Width>
+              <Width>3.10816cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.14854cm</Width>
+              <Width>3.10816cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.14854cm</Width>
+              <Width>3.10816cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -436,7 +436,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.03528cm</Top>
         <Height>1.73743cm</Height>
-        <Width>15.74271cm</Width>
+        <Width>16.75788cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -448,7 +448,7 @@
     <Height>0.69792in</Height>
     <Style />
   </Body>
-  <Width>6.19792in</Width>
+  <Width>6.59759in</Width>
   <Page>
     <PageHeader>
       <Height>2.54cm</Height>
@@ -466,14 +466,16 @@
                   <Style />
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>sale_date</rd:DefaultName>
           <Top>1.32884cm</Top>
-          <Left>0.12378cm</Left>
+          <Left>10.61892cm</Left>
           <Height>0.6cm</Height>
-          <Width>5.12378cm</Width>
+          <Width>5.47749cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -498,15 +500,79 @@
                   </Style>
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
           <Top>0.26141cm</Top>
-          <Left>6.01045cm</Left>
+          <Left>0.4942cm</Left>
           <Height>0.67938cm</Height>
-          <Width>3.43517cm</Width>
+          <Width>15.60221cm</Width>
           <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="sale_id">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Sum(Fields!sale_id.Value, "DataSet1")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>sale_id</rd:DefaultName>
+          <Top>1.32884cm</Top>
+          <Left>3.50163cm</Left>
+          <Height>0.6cm</Height>
+          <Width>5.94399cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox4">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Номер продажу:</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox4</rd:DefaultName>
+          <Top>1.32884cm</Top>
+          <Left>0.4942cm</Left>
+          <Height>0.6cm</Height>
+          <Width>2.9016cm</Width>
+          <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>

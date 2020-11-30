@@ -13,10 +13,7 @@ namespace Pharmacy
 {
     public partial class SaleDrugInsertForm : Form
     {
-        private const string DB_CONNECTION_STRING =
-            "server=localhost;user id=root;password=YflOe234fOEM;persistsecurityinfo=True;" +
-            "database=pharmacy";
-        private MySqlConnection connection_ = new MySqlConnection(DB_CONNECTION_STRING);
+        private MySqlConnection connection_;
         private DataTable drugsDt_ = new DataTable();
         private DataTable categoriesDt_ = new DataTable();
         private int currentSaleId_;
@@ -28,6 +25,8 @@ namespace Pharmacy
             dataTableBindingSource.DataSource = drugsDt_;
             drugsGridView.DataSource = dataTableBindingSource;
             currentSaleId_ = saleId;
+            connection_ =
+                new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             FillCategories();
             FillTable();
             categoryComboBox.SelectedItem = null;

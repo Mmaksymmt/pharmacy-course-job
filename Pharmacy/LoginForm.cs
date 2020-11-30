@@ -13,15 +13,14 @@ namespace Pharmacy
 {
     public partial class LoginForm : Form
     {
-        private const string DB_CONNECTION_STRING =
-            "server=localhost;user id=root;password=YflOe234fOEM;persistsecurityinfo=True;" +
-            "database=pharmacy";
-        private MySqlConnection connection_ = new MySqlConnection(DB_CONNECTION_STRING);
+        private MySqlConnection connection_;
 
 
         public LoginForm()
         {
             InitializeComponent();
+            connection_ =
+                new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
         }
 
 

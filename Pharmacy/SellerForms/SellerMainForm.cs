@@ -13,10 +13,7 @@ namespace Pharmacy
 {
     public partial class SellerMainForm : Form
     {
-        private const string DB_CONNECTION_STRING =
-            "server=localhost;user id=root;password=YflOe234fOEM;persistsecurityinfo=True;" +
-            "database=pharmacy";
-        private MySqlConnection connection_ = new MySqlConnection(DB_CONNECTION_STRING);
+        private MySqlConnection connection_;
         MySqlDataAdapter adapter_;
         private DataTable salesDt_ = new DataTable();
         private int sellerId_;
@@ -28,6 +25,8 @@ namespace Pharmacy
             sellerId_ = sellerId;
             datatableBindingSource.DataSource = salesDt_;
             salesGridView.DataSource = datatableBindingSource;
+            connection_ =
+                new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             CreateAdapter();
             FillData();
         }

@@ -13,10 +13,7 @@ namespace Pharmacy.SellerForms
 {
     public partial class SaleDrugEditForm : Form
     {
-        private const string DB_CONNECTION_STRING =
-            "server=localhost;user id=root;password=YflOe234fOEM;persistsecurityinfo=True;" +
-            "database=pharmacy";
-        private MySqlConnection connection_ = new MySqlConnection(DB_CONNECTION_STRING);
+        private MySqlConnection connection_;
         MySqlDataAdapter adapter_;
         private DataTable salesdrugsDt_ = new DataTable();
         private int saleId_;
@@ -30,6 +27,8 @@ namespace Pharmacy.SellerForms
             InitializeComponent();
             saleId_ = saleId;
             drugId_ = drugId;
+            connection_ =
+                new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             CreateAdapter();
             FillData();
         }

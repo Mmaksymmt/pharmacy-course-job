@@ -15,10 +15,7 @@ namespace Pharmacy
 {
     public partial class EditSaleForm : Form
     {
-        private const string DB_CONNECTION_STRING =
-            "server=localhost;user id=root;password=YflOe234fOEM;persistsecurityinfo=True;" +
-            "database=pharmacy";
-        private MySqlConnection connection_ = new MySqlConnection(DB_CONNECTION_STRING);
+        MySqlConnection connection_;
         DataTable salesDrugsDataTable = new DataTable();
         MySqlDataAdapter salesDrugsAdapter;
         private int sellerId_;
@@ -31,6 +28,8 @@ namespace Pharmacy
             sellerId_ = sellerId;
             salesdrugsBindingSource.DataSource = salesDrugsDataTable;
             salesDrugsGridView.DataSource = salesdrugsBindingSource;
+            connection_ =
+                new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
 
             InsertSale();
             CreateAdapter();
@@ -45,6 +44,8 @@ namespace Pharmacy
             currentSaleId_ = saleId;
             salesdrugsBindingSource.DataSource = salesDrugsDataTable;
             salesDrugsGridView.DataSource = salesdrugsBindingSource;
+            connection_ =
+                new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
 
             CreateAdapter();
             FillData();
