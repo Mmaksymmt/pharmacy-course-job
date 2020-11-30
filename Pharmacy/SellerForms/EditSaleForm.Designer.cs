@@ -36,6 +36,7 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
+            this.printCheckButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.salesDrugsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.salesdrugsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -105,11 +106,22 @@
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
+            // printCheckButton
+            // 
+            this.printCheckButton.Location = new System.Drawing.Point(256, 392);
+            this.printCheckButton.Name = "printCheckButton";
+            this.printCheckButton.Size = new System.Drawing.Size(98, 23);
+            this.printCheckButton.TabIndex = 6;
+            this.printCheckButton.Text = "Друкувати чек";
+            this.printCheckButton.UseVisualStyleBackColor = true;
+            this.printCheckButton.Click += new System.EventHandler(this.PrintCheckButton_Click);
+            // 
             // EditSaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.printCheckButton);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
@@ -132,5 +144,6 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button printCheckButton;
     }
 }

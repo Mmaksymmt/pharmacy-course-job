@@ -218,5 +218,12 @@ namespace Pharmacy
             form.ShowDialog();
             FillData();
         }
+
+
+        private void PrintCheckButton_Click(object sender, EventArgs e)
+        {
+            ReportForm form = new ReportForm(currentSaleId_);
+            form.ShowDialog();
+        }
     }
 }

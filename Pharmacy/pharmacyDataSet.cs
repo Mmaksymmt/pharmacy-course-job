@@ -6,10 +6,3 @@
     {
     }
 }
-
-namespace Pharmacy.pharmacyDataSetTableAdapters {
-    
-    
-    public partial class salesdrugsTableAdapter {
-    }
-}
