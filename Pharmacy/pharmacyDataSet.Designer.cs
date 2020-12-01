@@ -881,13 +881,13 @@ namespace Pharmacy {
             
             private global::System.Data.DataColumn columndrug_category_id;
             
-            private global::System.Data.DataColumn columndrug_shelf_life;
-            
             private global::System.Data.DataColumn columndrug_prescription_leave;
             
             private global::System.Data.DataColumn columndrug_price;
             
             private global::System.Data.DataColumn columndrug_amount;
+            
+            private global::System.Data.DataColumn columndrug_shelf_life;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -964,14 +964,6 @@ namespace Pharmacy {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn drug_shelf_lifeColumn {
-                get {
-                    return this.columndrug_shelf_life;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn drug_prescription_leaveColumn {
                 get {
                     return this.columndrug_prescription_leave;
@@ -991,6 +983,14 @@ namespace Pharmacy {
             public global::System.Data.DataColumn drug_amountColumn {
                 get {
                     return this.columndrug_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn drug_shelf_lifeColumn {
+                get {
+                    return this.columndrug_shelf_life;
                 }
             }
             
@@ -1031,7 +1031,7 @@ namespace Pharmacy {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public drugsRow AdddrugsRow(string drug_name, string drug_form, string drug_manufacturer, drugcategoriesRow parentdrugcategoriesRowBydrugs_ibfk_1, System.DateTime drug_shelf_life, bool drug_prescription_leave, decimal drug_price, uint drug_amount) {
+            public drugsRow AdddrugsRow(string drug_name, string drug_form, string drug_manufacturer, drugcategoriesRow parentdrugcategoriesRowBydrugs_ibfk_1, bool drug_prescription_leave, decimal drug_price, uint drug_amount, string drug_shelf_life) {
                 drugsRow rowdrugsRow = ((drugsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1039,10 +1039,10 @@ namespace Pharmacy {
                         drug_form,
                         drug_manufacturer,
                         null,
-                        drug_shelf_life,
                         drug_prescription_leave,
                         drug_price,
-                        drug_amount};
+                        drug_amount,
+                        drug_shelf_life};
                 if ((parentdrugcategoriesRowBydrugs_ibfk_1 != null)) {
                     columnValuesArray[4] = parentdrugcategoriesRowBydrugs_ibfk_1[0];
                 }
@@ -1080,10 +1080,10 @@ namespace Pharmacy {
                 this.columndrug_form = base.Columns["drug_form"];
                 this.columndrug_manufacturer = base.Columns["drug_manufacturer"];
                 this.columndrug_category_id = base.Columns["drug_category_id"];
-                this.columndrug_shelf_life = base.Columns["drug_shelf_life"];
                 this.columndrug_prescription_leave = base.Columns["drug_prescription_leave"];
                 this.columndrug_price = base.Columns["drug_price"];
                 this.columndrug_amount = base.Columns["drug_amount"];
+                this.columndrug_shelf_life = base.Columns["drug_shelf_life"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1099,14 +1099,14 @@ namespace Pharmacy {
                 base.Columns.Add(this.columndrug_manufacturer);
                 this.columndrug_category_id = new global::System.Data.DataColumn("drug_category_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndrug_category_id);
-                this.columndrug_shelf_life = new global::System.Data.DataColumn("drug_shelf_life", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndrug_shelf_life);
                 this.columndrug_prescription_leave = new global::System.Data.DataColumn("drug_prescription_leave", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndrug_prescription_leave);
                 this.columndrug_price = new global::System.Data.DataColumn("drug_price", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndrug_price);
                 this.columndrug_amount = new global::System.Data.DataColumn("drug_amount", typeof(uint), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndrug_amount);
+                this.columndrug_shelf_life = new global::System.Data.DataColumn("drug_shelf_life", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndrug_shelf_life);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columndrug_id}, true));
                 this.columndrug_id.AutoIncrement = true;
@@ -1124,6 +1124,7 @@ namespace Pharmacy {
                 this.columndrug_prescription_leave.AllowDBNull = false;
                 this.columndrug_price.AllowDBNull = false;
                 this.columndrug_amount.AllowDBNull = false;
+                this.columndrug_shelf_life.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3342,22 +3343,6 @@ namespace Pharmacy {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime drug_shelf_life {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tabledrugs.drug_shelf_lifeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'drug_shelf_life\' в таблице \'drugs\' равно DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledrugs.drug_shelf_lifeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool drug_prescription_leave {
                 get {
                     return ((bool)(this[this.tabledrugs.drug_prescription_leaveColumn]));
@@ -3386,6 +3371,22 @@ namespace Pharmacy {
                 }
                 set {
                     this[this.tabledrugs.drug_amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string drug_shelf_life {
+                get {
+                    try {
+                        return ((string)(this[this.tabledrugs.drug_shelf_lifeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'drug_shelf_life\' в таблице \'drugs\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledrugs.drug_shelf_lifeColumn] = value;
                 }
             }
             
@@ -4814,14 +4815,17 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("drug_form", "drug_form");
             tableMapping.ColumnMappings.Add("drug_manufacturer", "drug_manufacturer");
             tableMapping.ColumnMappings.Add("drug_category_id", "drug_category_id");
-            tableMapping.ColumnMappings.Add("drug_shelf_life", "drug_shelf_life");
             tableMapping.ColumnMappings.Add("drug_prescription_leave", "drug_prescription_leave");
             tableMapping.ColumnMappings.Add("drug_price", "drug_price");
             tableMapping.ColumnMappings.Add("drug_amount", "drug_amount");
+            tableMapping.ColumnMappings.Add("drug_shelf_life", "drug_shelf_life");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `drugs` WHERE ((`drug_id` = @p1) AND (`drug_name` = @p2) AND (`drug_form` = @p3) AND (`drug_manufacturer` = @p4) AND (`drug_category_id` = @p5) AND ((@p6 = 1 AND `drug_shelf_life` IS NULL) OR (`drug_shelf_life` = @p7)) AND (`drug_prescription_leave` = @p8) AND (`drug_price` = @p9) AND (`drug_amount` = @p10))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM `drugs` WHERE ((`drug_id` = @p1) AND (`drug_name` = @p2) AND (`drug_f" +
+                "orm` = @p3) AND (`drug_manufacturer` = @p4) AND (`drug_category_id` = @p5) AND (" +
+                "`drug_prescription_leave` = @p6) AND (`drug_price` = @p7) AND (`drug_amount` = @" +
+                "p8))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -4862,23 +4866,6 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p6";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "drug_shelf_life";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p7";
-            param.DbType = global::System.Data.DbType.Date;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "drug_shelf_life";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p8";
             param.DbType = global::System.Data.DbType.SByte;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Byte;
             param.IsNullable = true;
@@ -4886,7 +4873,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p9";
+            param.ParameterName = "@p7";
             param.DbType = global::System.Data.DbType.Decimal;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.NewDecimal;
             param.IsNullable = true;
@@ -4894,7 +4881,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p10";
+            param.ParameterName = "@p8";
             param.DbType = global::System.Data.DbType.UInt32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.UInt32;
             param.IsNullable = true;
@@ -4904,8 +4891,8 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             this._adapter.InsertCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO `drugs` (`drug_name`, `drug_form`, `drug_manufacturer`, `drug_categor" +
-                "y_id`, `drug_shelf_life`, `drug_prescription_leave`, `drug_price`, `drug_amount`" +
-                ") VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8)";
+                "y_id`, `drug_prescription_leave`, `drug_price`, `drug_amount`) VALUES (@p1, @p2," +
+                " @p3, @p4, @p5, @p6, @p7)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -4938,14 +4925,6 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p5";
-            param.DbType = global::System.Data.DbType.Date;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "drug_shelf_life";
-            param.SourceVersion = global::System.Data.DataRowVersion.Current;
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p6";
             param.DbType = global::System.Data.DbType.SByte;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Byte;
             param.IsNullable = true;
@@ -4953,7 +4932,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p7";
+            param.ParameterName = "@p6";
             param.DbType = global::System.Data.DbType.Decimal;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.NewDecimal;
             param.IsNullable = true;
@@ -4961,7 +4940,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p8";
+            param.ParameterName = "@p7";
             param.DbType = global::System.Data.DbType.UInt32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.UInt32;
             param.IsNullable = true;
@@ -4970,7 +4949,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `drugs` SET `drug_name` = @p1, `drug_form` = @p2, `drug_manufacturer` = @p3, `drug_category_id` = @p4, `drug_shelf_life` = @p5, `drug_prescription_leave` = @p6, `drug_price` = @p7, `drug_amount` = @p8 WHERE ((`drug_id` = @p9) AND (`drug_name` = @p10) AND (`drug_form` = @p11) AND (`drug_manufacturer` = @p12) AND (`drug_category_id` = @p13) AND ((@p14 = 1 AND `drug_shelf_life` IS NULL) OR (`drug_shelf_life` = @p15)) AND (`drug_prescription_leave` = @p16) AND (`drug_price` = @p17) AND (`drug_amount` = @p18))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `drugs` SET `drug_name` = @p1, `drug_form` = @p2, `drug_manufacturer` = @p3, `drug_category_id` = @p4, `drug_prescription_leave` = @p5, `drug_price` = @p6, `drug_amount` = @p7 WHERE ((`drug_id` = @p8) AND (`drug_name` = @p9) AND (`drug_form` = @p10) AND (`drug_manufacturer` = @p11) AND (`drug_category_id` = @p12) AND (`drug_prescription_leave` = @p13) AND (`drug_price` = @p14) AND (`drug_amount` = @p15))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -5003,14 +4982,6 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p5";
-            param.DbType = global::System.Data.DbType.Date;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "drug_shelf_life";
-            param.SourceVersion = global::System.Data.DataRowVersion.Current;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p6";
             param.DbType = global::System.Data.DbType.SByte;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Byte;
             param.IsNullable = true;
@@ -5018,7 +4989,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p7";
+            param.ParameterName = "@p6";
             param.DbType = global::System.Data.DbType.Decimal;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.NewDecimal;
             param.IsNullable = true;
@@ -5026,7 +4997,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p8";
+            param.ParameterName = "@p7";
             param.DbType = global::System.Data.DbType.UInt32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.UInt32;
             param.IsNullable = true;
@@ -5034,7 +5005,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p9";
+            param.ParameterName = "@p8";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -5042,28 +5013,28 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p10";
+            param.ParameterName = "@p9";
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Text;
             param.IsNullable = true;
             param.SourceColumn = "drug_name";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p11";
+            param.ParameterName = "@p10";
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Text;
             param.IsNullable = true;
             param.SourceColumn = "drug_form";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p12";
+            param.ParameterName = "@p11";
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Text;
             param.IsNullable = true;
             param.SourceColumn = "drug_manufacturer";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p13";
+            param.ParameterName = "@p12";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -5071,24 +5042,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p14";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "drug_shelf_life";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p15";
-            param.DbType = global::System.Data.DbType.Date;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "drug_shelf_life";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p16";
+            param.ParameterName = "@p13";
             param.DbType = global::System.Data.DbType.SByte;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Byte;
             param.IsNullable = true;
@@ -5096,7 +5050,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p17";
+            param.ParameterName = "@p14";
             param.DbType = global::System.Data.DbType.Decimal;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.NewDecimal;
             param.IsNullable = true;
@@ -5104,7 +5058,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p18";
+            param.ParameterName = "@p15";
             param.DbType = global::System.Data.DbType.UInt32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.UInt32;
             param.IsNullable = true;
@@ -5126,9 +5080,8 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT `drug_id`, `drug_name`, `drug_form`, `drug_manufacturer`, `drug_category_i" +
-                "d`, `drug_shelf_life`, `drug_prescription_leave`, `drug_price`, `drug_amount` FR" +
-                "OM `drugs`";
+            this._commandCollection[0].CommandText = "SELECT drug_id, drug_name, drug_form, drug_manufacturer, drug_category_id, drug_p" +
+                "rescription_leave, drug_price, drug_amount FROM drugs";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5189,7 +5142,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int p1, string p2, string p3, string p4, int p5, global::System.Nullable<global::System.DateTime> p7, byte p8, decimal p9, uint p10) {
+        public virtual int Delete(int p1, string p2, string p3, string p4, int p5, byte p6, decimal p7, uint p8) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(p1));
             if ((p2 == null)) {
                 throw new global::System.ArgumentNullException("p2");
@@ -5210,17 +5163,9 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(p4));
             }
             this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(p5));
-            if ((p7.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(p7.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.DeleteCommand.Parameters[7].Value = ((byte)(p8));
-            this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(p9));
-            this.Adapter.DeleteCommand.Parameters[9].Value = ((uint)(p10));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((byte)(p6));
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(p7));
+            this.Adapter.DeleteCommand.Parameters[7].Value = ((uint)(p8));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5241,7 +5186,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string p1, string p2, string p3, int p4, global::System.Nullable<global::System.DateTime> p5, byte p6, decimal p7, uint p8) {
+        public virtual int Insert(string p1, string p2, string p3, int p4, byte p5, decimal p6, uint p7) {
             if ((p1 == null)) {
                 throw new global::System.ArgumentNullException("p1");
             }
@@ -5261,15 +5206,9 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(p3));
             }
             this.Adapter.InsertCommand.Parameters[3].Value = ((int)(p4));
-            if ((p5.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(p5.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.InsertCommand.Parameters[5].Value = ((byte)(p6));
-            this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(p7));
-            this.Adapter.InsertCommand.Parameters[7].Value = ((uint)(p8));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((byte)(p5));
+            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(p6));
+            this.Adapter.InsertCommand.Parameters[6].Value = ((uint)(p7));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5290,24 +5229,7 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string p1, 
-                    string p2, 
-                    string p3, 
-                    int p4, 
-                    global::System.Nullable<global::System.DateTime> p5, 
-                    byte p6, 
-                    decimal p7, 
-                    uint p8, 
-                    int p9, 
-                    string p10, 
-                    string p11, 
-                    string p12, 
-                    int p13, 
-                    global::System.Nullable<global::System.DateTime> p15, 
-                    byte p16, 
-                    decimal p17, 
-                    uint p18) {
+        public virtual int Update(string p1, string p2, string p3, int p4, byte p5, decimal p6, uint p7, int p8, string p9, string p10, string p11, int p12, byte p13, decimal p14, uint p15) {
             if ((p1 == null)) {
                 throw new global::System.ArgumentNullException("p1");
             }
@@ -5327,16 +5249,16 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(p3));
             }
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(p4));
-            if ((p5.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(p5.Value));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((byte)(p5));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(p6));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((uint)(p7));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(p8));
+            if ((p9 == null)) {
+                throw new global::System.ArgumentNullException("p9");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(p9));
             }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((byte)(p6));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(p7));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((uint)(p8));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(p9));
             if ((p10 == null)) {
                 throw new global::System.ArgumentNullException("p10");
             }
@@ -5349,24 +5271,10 @@ namespace Pharmacy.pharmacyDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(p11));
             }
-            if ((p12 == null)) {
-                throw new global::System.ArgumentNullException("p12");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(p12));
-            }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(p13));
-            if ((p15.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(p15.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((byte)(p16));
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(p17));
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((uint)(p18));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(p12));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((byte)(p13));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(p14));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((uint)(p15));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

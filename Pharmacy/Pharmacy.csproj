@@ -115,6 +115,12 @@
     <Compile Include="AdminForms\AdminMainForm.Designer.cs">
       <DependentUpon>AdminMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminForms\EditDrugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\EditDrugForm.Designer.cs">
+      <DependentUpon>EditDrugForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="pharmacyDataSet.cs">
       <DependentUpon>pharmacyDataSet.xsd</DependentUpon>
     </Compile>
@@ -161,6 +167,12 @@
     <Compile Include="SellerForms\SellerMainForm.Designer.cs">
       <DependentUpon>SellerMainForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminForms\AdminMainForm.resx">
+      <DependentUpon>AdminMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\EditDrugForm.resx">
+      <DependentUpon>EditDrugForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerCheckReport.rdlc" />
     <EmbeddedResource Include="SellerForms\EditSaleForm.resx">
       <DependentUpon>EditSaleForm.cs</DependentUpon>

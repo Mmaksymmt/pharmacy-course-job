@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using Pharmacy.AdminForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -75,8 +76,7 @@ namespace Pharmacy
 
             if ((bool)sellers.Rows[0]["seller_admin"])
             {
-                //form = new AdminMainForm((int)sellers.Rows[0]["seller_id"]);
-                form = new SellerMainForm((int)sellers.Rows[0]["seller_id"]);
+                form = new AdminMainForm((int)sellers.Rows[0]["seller_id"]);
             }
             else
             {
