@@ -36,10 +36,12 @@
             this.лекарстваToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addDrugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editDrugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteDrugsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.drugsGridView = new System.Windows.Forms.DataGridView();
             this.tableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.searchGroupBox = new System.Windows.Forms.GroupBox();
+            this.substTextBox = new System.Windows.Forms.TextBox();
             this.substLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
@@ -48,8 +50,8 @@
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
             this.substancesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.substancesGridView = new System.Windows.Forms.DataGridView();
-            this.substTextBox = new System.Windows.Forms.TextBox();
-            this.deleteDrugsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.purchaseListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableBindingSource)).BeginInit();
@@ -95,7 +97,9 @@
             this.лекарстваToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addDrugToolStripMenuItem,
             this.editDrugToolStripMenuItem,
-            this.deleteDrugsToolStripMenuItem});
+            this.deleteDrugsToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.purchaseListToolStripMenuItem});
             this.лекарстваToolStripMenuItem.Name = "лекарстваToolStripMenuItem";
             this.лекарстваToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.лекарстваToolStripMenuItem.Text = "Ліки";
@@ -113,6 +117,13 @@
             this.editDrugToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editDrugToolStripMenuItem.Text = "Редагувати";
             this.editDrugToolStripMenuItem.Click += new System.EventHandler(this.EditDrugToolStripMenuItem_Click);
+            // 
+            // deleteDrugsToolStripMenuItem
+            // 
+            this.deleteDrugsToolStripMenuItem.Name = "deleteDrugsToolStripMenuItem";
+            this.deleteDrugsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteDrugsToolStripMenuItem.Text = "Видалити";
+            this.deleteDrugsToolStripMenuItem.Click += new System.EventHandler(this.DeleteDrugsToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -150,6 +161,13 @@
             this.searchGroupBox.TabIndex = 16;
             this.searchGroupBox.TabStop = false;
             this.searchGroupBox.Text = "Пошук";
+            // 
+            // substTextBox
+            // 
+            this.substTextBox.Location = new System.Drawing.Point(88, 127);
+            this.substTextBox.Name = "substTextBox";
+            this.substTextBox.Size = new System.Drawing.Size(230, 20);
+            this.substTextBox.TabIndex = 16;
             // 
             // substLabel
             // 
@@ -218,19 +236,17 @@
             this.substancesGridView.Size = new System.Drawing.Size(593, 135);
             this.substancesGridView.TabIndex = 17;
             // 
-            // substTextBox
+            // toolStripMenuItem2
             // 
-            this.substTextBox.Location = new System.Drawing.Point(88, 127);
-            this.substTextBox.Name = "substTextBox";
-            this.substTextBox.Size = new System.Drawing.Size(230, 20);
-            this.substTextBox.TabIndex = 16;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
-            // deleteDrugsToolStripMenuItem
+            // purchaseListToolStripMenuItem
             // 
-            this.deleteDrugsToolStripMenuItem.Name = "deleteDrugsToolStripMenuItem";
-            this.deleteDrugsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.deleteDrugsToolStripMenuItem.Text = "Видалити";
-            this.deleteDrugsToolStripMenuItem.Click += new System.EventHandler(this.DeleteDrugsToolStripMenuItem_Click);
+            this.purchaseListToolStripMenuItem.Name = "purchaseListToolStripMenuItem";
+            this.purchaseListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.purchaseListToolStripMenuItem.Text = "Список закупки";
+            this.purchaseListToolStripMenuItem.Click += new System.EventHandler(this.purchaseListToolStripMenuItem_Click);
             // 
             // AdminMainForm
             // 
@@ -280,5 +296,7 @@
         private System.Windows.Forms.DataGridView substancesGridView;
         private System.Windows.Forms.TextBox substTextBox;
         private System.Windows.Forms.ToolStripMenuItem deleteDrugsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem purchaseListToolStripMenuItem;
     }
 }

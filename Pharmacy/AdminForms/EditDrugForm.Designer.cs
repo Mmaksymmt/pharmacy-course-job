@@ -176,6 +176,7 @@ namespace Pharmacy.AdminForms
             // 
             // priceUpDown
             // 
+            this.priceUpDown.DecimalPlaces = 2;
             this.priceUpDown.Location = new System.Drawing.Point(132, 234);
             this.priceUpDown.Maximum = new decimal(new int[] {
             1000000,

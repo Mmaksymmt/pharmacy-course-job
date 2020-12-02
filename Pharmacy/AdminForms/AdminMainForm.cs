@@ -39,16 +39,20 @@ namespace Pharmacy.AdminForms
             if (categoryRow == null)
             {
                 query = "SELECT drug_id, drug_name, drugcategories.category_name, " +
-                    "drug_form, drug_manufacturer, drug_prescription_leave, drug_price, " +
-                    "drug_amount FROM drugs INNER JOIN drugcategories " +
+                    "drug_form, drug_manufacturer, drug_prescription_leave, drug_price, drug_amount, " +
+                    "(SELECT SUM(salesdrugs_amount) " +
+                    "FROM salesdrugs WHERE salesdrugs.drug_id = drugs.drug_id) as sold " +
+                    "FROM drugs INNER JOIN drugcategories " +
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0";
             }
             else
             {
                 query = "SELECT drug_id, drug_name, drugcategories.category_name, " +
-                    "drug_form, drug_manufacturer, drug_prescription_leave, drug_price, " +
-                    "drug_amount FROM drugs INNER JOIN drugcategories " +
+                    "drug_form, drug_manufacturer, drug_prescription_leave, drug_price, drug_amount, " +
+                    "(SELECT SUM(salesdrugs_amount) FROM salesdrugs " +
+                    "WHERE salesdrugs.drug_id = drugs.drug_id) as sold " +
+                    "FROM drugs INNER JOIN drugcategories " +
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
                     "AND drug_category_id = @category_id";
@@ -217,6 +221,13 @@ namespace Pharmacy.AdminForms
 
             connection_.Close();
             FillDrugs();
+        }
+
+
+        private void purchaseListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PurchaseListForm form = new PurchaseListForm();
+            form.ShowDialog();
         }
     }
 }
