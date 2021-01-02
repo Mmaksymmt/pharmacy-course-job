@@ -20,11 +20,13 @@ namespace Pharmacy
         MySqlDataAdapter salesDrugsAdapter;
         private int sellerId_;
         private int currentSaleId_;
+        private bool isCreating_;
 
 
         public EditSaleForm(int sellerId)
         {
             InitializeComponent();
+            isCreating_ = true;
             sellerId_ = sellerId;
             salesdrugsBindingSource.DataSource = salesDrugsDataTable;
             salesDrugsGridView.DataSource = salesdrugsBindingSource;
@@ -34,12 +36,14 @@ namespace Pharmacy
             InsertSale();
             CreateAdapter();
             FillData();
+            DisableUnnecessaryControls();
         }
 
 
         public EditSaleForm(int sellerId, int saleId)
         {
             InitializeComponent();
+            isCreating_ = false;
             sellerId_ = sellerId;
             currentSaleId_ = saleId;
             salesdrugsBindingSource.DataSource = salesDrugsDataTable;
@@ -49,10 +53,18 @@ namespace Pharmacy
 
             CreateAdapter();
             FillData();
+            DisableUnnecessaryControls();
         }
 
 
-        public void CreateAdapter()
+        private void DisableUnnecessaryControls()
+        {
+            deleteButton.Enabled = editButton.Enabled = cancelButton.Enabled =
+                isCreating_;
+        }
+
+
+        private void CreateAdapter()
         {
             const string FILL_TABLE_QUERY = "SELECT salesdrugs.drug_id, drug_name, " +
                 "salesdrugs_amount, salesdrugs_price, " +
@@ -76,7 +88,7 @@ namespace Pharmacy
         }
 
 
-        public void InsertSale()
+        private void InsertSale()
         {
             string query = $"INSERT INTO sales (sale_seller_id) VALUES ({sellerId_});" +
                 "SELECT LAST_INSERT_ID();";
@@ -100,7 +112,7 @@ namespace Pharmacy
         }
 
 
-        public void FillData()
+        private void FillData()
         {
             salesDrugsDataTable.Rows.Clear();
 
@@ -119,7 +131,7 @@ namespace Pharmacy
         }
 
 
-        public void SaveChangesToDatabase()
+        private void SaveChangesToDatabase()
         {
             salesDrugsAdapter.Update(salesDrugsDataTable);
 

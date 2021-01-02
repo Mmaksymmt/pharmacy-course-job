@@ -46,6 +46,9 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.searchGroupBox = new System.Windows.Forms.GroupBox();
             this.paramsGroupBox = new System.Windows.Forms.GroupBox();
+            this.orderByLabel = new System.Windows.Forms.Label();
+            this.orderByComboBox = new System.Windows.Forms.ComboBox();
+            this.descendingCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableBindingSource)).BeginInit();
@@ -135,7 +138,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(64, 341);
+            this.saveButton.Location = new System.Drawing.Point(67, 321);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 10;
@@ -145,7 +148,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(214, 341);
+            this.cancelButton.Location = new System.Drawing.Point(217, 321);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 11;
@@ -158,13 +161,13 @@
             this.drugsGridView.AllowUserToAddRows = false;
             this.drugsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.drugsGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.drugsGridView.Location = new System.Drawing.Point(370, 47);
+            this.drugsGridView.Location = new System.Drawing.Point(369, 48);
             this.drugsGridView.MultiSelect = false;
             this.drugsGridView.Name = "drugsGridView";
             this.drugsGridView.ReadOnly = true;
             this.drugsGridView.RowHeadersVisible = false;
             this.drugsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.drugsGridView.Size = new System.Drawing.Size(581, 317);
+            this.drugsGridView.Size = new System.Drawing.Size(581, 296);
             this.drugsGridView.TabIndex = 12;
             this.drugsGridView.SelectionChanged += new System.EventHandler(this.DrugsGridView_SelectionChanged);
             // 
@@ -213,11 +216,44 @@
             this.paramsGroupBox.TabIndex = 16;
             this.paramsGroupBox.TabStop = false;
             // 
+            // orderByLabel
+            // 
+            this.orderByLabel.AutoSize = true;
+            this.orderByLabel.Location = new System.Drawing.Point(366, 24);
+            this.orderByLabel.Name = "orderByLabel";
+            this.orderByLabel.Size = new System.Drawing.Size(93, 13);
+            this.orderByLabel.TabIndex = 17;
+            this.orderByLabel.Text = "Впорядкувати за";
+            // 
+            // orderByComboBox
+            // 
+            this.orderByComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.orderByComboBox.FormattingEnabled = true;
+            this.orderByComboBox.Location = new System.Drawing.Point(491, 21);
+            this.orderByComboBox.Name = "orderByComboBox";
+            this.orderByComboBox.Size = new System.Drawing.Size(121, 21);
+            this.orderByComboBox.TabIndex = 18;
+            this.orderByComboBox.SelectedIndexChanged += new System.EventHandler(this.OrderByComboBox_SelectedIndexChanged);
+            // 
+            // descendingCheckBox
+            // 
+            this.descendingCheckBox.AutoSize = true;
+            this.descendingCheckBox.Location = new System.Drawing.Point(641, 24);
+            this.descendingCheckBox.Name = "descendingCheckBox";
+            this.descendingCheckBox.Size = new System.Drawing.Size(152, 17);
+            this.descendingCheckBox.TabIndex = 19;
+            this.descendingCheckBox.Text = "Від більшого до меншого";
+            this.descendingCheckBox.UseVisualStyleBackColor = true;
+            this.descendingCheckBox.CheckedChanged += new System.EventHandler(this.DescendingCheckBox_CheckedChanged);
+            // 
             // SaleDrugInsertForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 421);
+            this.ClientSize = new System.Drawing.Size(978, 458);
+            this.Controls.Add(this.descendingCheckBox);
+            this.Controls.Add(this.orderByComboBox);
+            this.Controls.Add(this.orderByLabel);
             this.Controls.Add(this.paramsGroupBox);
             this.Controls.Add(this.searchGroupBox);
             this.Controls.Add(this.drugsGridView);
@@ -233,6 +269,7 @@
             this.paramsGroupBox.ResumeLayout(false);
             this.paramsGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -255,5 +292,8 @@
         private System.Windows.Forms.BindingSource dataTableBindingSource;
         private System.Windows.Forms.GroupBox searchGroupBox;
         private System.Windows.Forms.GroupBox paramsGroupBox;
+        private System.Windows.Forms.Label orderByLabel;
+        private System.Windows.Forms.ComboBox orderByComboBox;
+        private System.Windows.Forms.CheckBox descendingCheckBox;
     }
 }

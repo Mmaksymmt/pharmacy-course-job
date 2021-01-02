@@ -28,8 +28,24 @@ namespace Pharmacy
             connection_ =
                 new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             FillCategories();
-            FillTable();
+            FillOrderingFields();
+            //FillTable();
             categoryComboBox.SelectedItem = null;
+        }
+
+
+        private void FillOrderingFields()
+        {
+            List<OrderFieldItem> orderFields = new List<OrderFieldItem>()
+            {
+                new OrderFieldItem("drug_id", "ID"),
+                new OrderFieldItem("drug_name", "Назвою"),
+                new OrderFieldItem("drug_price", "Ціною"),
+                new OrderFieldItem("drug_amount", "Кількістю на складі")
+            };
+            orderByComboBox.DataSource = orderFields;
+            orderByComboBox.DisplayMember = nameof(OrderFieldItem.Pseudonym);
+            orderByComboBox.SelectedIndex = 0;
         }
 
 
@@ -38,6 +54,8 @@ namespace Pharmacy
             DataRow categoryRow = (categoryComboBox.SelectedItem as DataRowView)?.Row;
             string query;
             MySqlCommand command = new MySqlCommand() { Connection = connection_ };
+            string orderField = (orderByComboBox.SelectedItem as OrderFieldItem).FieldName;
+            string orderDirection = descendingCheckBox.Checked ? "DESC" : "ASC";
 
             if (categoryRow == null)
             {
@@ -47,7 +65,8 @@ namespace Pharmacy
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
                     "AND drug_id NOT IN " +
-                    "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id);";
+                    "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id) " +
+                    $"ORDER BY {orderField} {orderDirection};";
             }
             else
             {
@@ -57,11 +76,11 @@ namespace Pharmacy
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
                     "AND drug_category_id = @category_id AND drug_id NOT IN " +
-                    "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id);";
+                    "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id) " +
+                    $"ORDER BY {orderField} {orderDirection};";
                 int categoryId = Convert.ToInt32(categoryRow["category_id"]);
                 command.Parameters.AddWithValue("@category_id", categoryId);
             }
-
             command.Parameters.AddWithValue("@sale_id", currentSaleId_);
             command.Parameters.AddWithValue("@name_filter", nameTextBox.Text);
             command.CommandText = query;
@@ -78,8 +97,12 @@ namespace Pharmacy
                 MessageBox.Show($"Error: {ex.Message}");
                 throw;
             }
-
             connection_.Close();
+
+            foreach (var col in drugsGridView.Columns)
+            {
+                (col as DataGridViewColumn).SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
 
@@ -220,6 +243,31 @@ namespace Pharmacy
         private void AmountNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             UpdatePriceLabel();
+        }
+
+
+        private class OrderFieldItem
+        {
+            public string FieldName { get; set; }
+            public string Pseudonym { get; set; }
+
+            public OrderFieldItem(string fieldName, string pseudonym)
+            {
+                FieldName = fieldName;
+                Pseudonym = pseudonym;
+            }
+        }
+
+
+        private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillTable();
+        }
+
+
+        private void DescendingCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            FillTable();
         }
     }
 }

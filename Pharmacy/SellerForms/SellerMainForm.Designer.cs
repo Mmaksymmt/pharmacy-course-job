@@ -38,7 +38,7 @@
             this.datatableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.salesGridView = new System.Windows.Forms.DataGridView();
             this.addSaleButton = new System.Windows.Forms.Button();
-            this.editButton = new System.Windows.Forms.Button();
+            this.openSaleButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datatableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.salesGridView)).BeginInit();
@@ -116,22 +116,22 @@
             this.addSaleButton.UseVisualStyleBackColor = true;
             this.addSaleButton.Click += new System.EventHandler(this.AddSaleToolStripMenuItem_Click);
             // 
-            // editButton
+            // openSaleButton
             // 
-            this.editButton.Location = new System.Drawing.Point(157, 406);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(75, 23);
-            this.editButton.TabIndex = 3;
-            this.editButton.Text = "Змінити";
-            this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
+            this.openSaleButton.Location = new System.Drawing.Point(157, 406);
+            this.openSaleButton.Name = "openSaleButton";
+            this.openSaleButton.Size = new System.Drawing.Size(84, 23);
+            this.openSaleButton.TabIndex = 3;
+            this.openSaleButton.Text = "Відкрити";
+            this.openSaleButton.UseVisualStyleBackColor = true;
+            this.openSaleButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // SellerMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.editButton);
+            this.Controls.Add(this.openSaleButton);
             this.Controls.Add(this.addSaleButton);
             this.Controls.Add(this.salesGridView);
             this.Controls.Add(this.menuStrip1);
@@ -158,6 +158,6 @@
         private System.Windows.Forms.ToolStripMenuItem addSaleToolStripMenuItem;
         private System.Windows.Forms.DataGridView salesGridView;
         private System.Windows.Forms.Button addSaleButton;
-        private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button openSaleButton;
     }
 }
