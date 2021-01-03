@@ -59,7 +59,10 @@ namespace Pharmacy
 
         private void DisableUnnecessaryControls()
         {
-            deleteButton.Enabled = editButton.Enabled = cancelButton.Enabled =
+            insertButton.Enabled =
+            deleteButton.Enabled =
+            editButton.Enabled =
+            cancelButton.Enabled =
                 isCreating_;
         }
 

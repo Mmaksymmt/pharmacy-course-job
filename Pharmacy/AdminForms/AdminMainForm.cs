@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Pharmacy.AdminForms
@@ -17,49 +19,69 @@ namespace Pharmacy.AdminForms
         public AdminMainForm(int adminId)
         {
             InitializeComponent();
-            adminId_ = adminId;
+            drugsTableBindingSource.DataSource = drugsDt_;
+            drugsGridView.DataSource = drugsTableBindingSource;
+            substTableBindingSource.DataSource = substancesDt_;
+            substancesGridView.DataSource = substTableBindingSource;
             connection_ =
                 new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
-            drugsGridView.DataSource = tableBindingSource;
-            tableBindingSource.DataSource = drugsDt_;
-            substancesBindingSource.DataSource = substancesDt_;
-            substancesGridView.DataSource = substancesBindingSource;
             FillCategories();
-            categoryComboBox.SelectedItem = null;
-            FillDrugs();
+            FillOrderingFields();
+            categoryFilterComboBox.SelectedItem = null;
         }
 
 
         private void FillDrugs()
         {
-            DataRow categoryRow = (categoryComboBox.SelectedItem as DataRowView)?.Row;
+            DataRow categoryRow = (categoryFilterComboBox.SelectedItem as DataRowView)?.Row;
             string query;
             MySqlCommand command = new MySqlCommand() { Connection = connection_ };
+            string orderField = (orderByComboBox.SelectedItem as OrderFieldItem).FieldName;
+            string orderDirection = descendingCheckBox.Checked ? "DESC" : "ASC";
+            decimal minPriceFilter;
+            bool minPriceParced =
+                decimal.TryParse(minPriceFilterTextBox.Text, out minPriceFilter);
+            decimal maxPriceFilter;
+            bool maxPriceParced =
+                decimal.TryParse(maxPriceFilterTextBox.Text, out maxPriceFilter);
+            if (!minPriceParced)
+            {
+                minPriceFilter = 0;
+            }
+            if (!maxPriceParced)
+            {
+                maxPriceFilter = decimal.MaxValue;
+            }
 
             if (categoryRow == null)
             {
-                query = "SELECT drug_id, drug_name, drugcategories.category_name, " +
-                    "drug_form, drug_manufacturer, drug_prescription_leave, drug_price, drug_amount, " +
-                    "(SELECT SUM(salesdrugs_amount) " +
-                    "FROM salesdrugs WHERE salesdrugs.drug_id = drugs.drug_id) as sold " +
-                    "FROM drugs INNER JOIN drugcategories " +
-                    "ON drugs.drug_category_id = drugcategories.category_id " +
-                    "WHERE LOCATE(@name_filter, drug_name) > 0";
-            }
-            else
-            {
-                query = "SELECT drug_id, drug_name, drugcategories.category_name, " +
-                    "drug_form, drug_manufacturer, drug_prescription_leave, drug_price, drug_amount, " +
-                    "(SELECT SUM(salesdrugs_amount) FROM salesdrugs " +
-                    "WHERE salesdrugs.drug_id = drugs.drug_id) as sold " +
+                query = "SELECT drug_id, drug_name, drugcategories.category_name, drug_form, " +
+                    "drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
                     "FROM drugs INNER JOIN drugcategories " +
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
-                    "AND drug_category_id = @category_id";
+                    "AND LOCATE(@manuf_filter, drug_manufacturer) > 0 " +
+                    "AND drug_price >= @min_price AND drug_price <= @max_price " +
+                    "AND drug_prescription_leave = @presc_filter " +
+                    "AND drug_amount >= @amount_filter " +
+                    $"ORDER BY {orderField} {orderDirection}";
+            }
+            else
+            {
+                query = "SELECT drug_id, drug_name, drugcategories.category_name, drug_form, " +
+                    "drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                    "FROM drugs INNER JOIN drugcategories " +
+                    "ON drugs.drug_category_id = drugcategories.category_id " +
+                    "WHERE LOCATE(@name_filter, drug_name) > 0 " +
+                    "AND LOCATE(@manuf_filter, drug_manufacturer) > 0 " +
+                    "AND drug_price >= @min_price AND drug_price <= @max_price " +
+                    "AND drug_prescription_leave = @presc_filter " +
+                    "AND drug_amount >= @amount_filter " +
+                    "AND drug_category_id = @category_id " +
+                    $"ORDER BY {orderField} {orderDirection}";
                 int categoryId = Convert.ToInt32(categoryRow["category_id"]);
                 command.Parameters.AddWithValue("@category_id", categoryId);
             }
-
             if (substTextBox.Text.Length != 0)
             {
                 query = $"SELECT T.drug_id, T.drug_name, T.category_name, drug_form, " +
@@ -69,21 +91,34 @@ namespace Pharmacy.AdminForms
                     $"ON drugssubstances.subst_id = substances.subst_id " +
                     $"WHERE LOCATE(@subst_str, subst_name) > 0;";
             }
-
-            command.Parameters.AddWithValue("@name_filter", nameTextBox.Text);
+            command.Parameters.AddWithValue("@name_filter", nameFilterTextBox.Text);
+            command.Parameters.AddWithValue("@manuf_filter", manufFilterTextBox.Text);
+            command.Parameters.AddWithValue("@min_price", minPriceFilter);
+            command.Parameters.AddWithValue("@max_price", maxPriceFilter);
             command.Parameters.AddWithValue("@subst_str", substTextBox.Text);
+            command.Parameters.AddWithValue("@presc_filter", prescriptionFilterCheckBox.Checked);
+            command.Parameters.AddWithValue(
+                "@amount_filter",
+                leftInStockFilterCheckBox.Checked ? 1 : 0);
             command.CommandText = query;
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             drugsDt_.Rows.Clear();
 
             try
             {
+                connection_.Open();
                 adapter.Fill(drugsDt_);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Drugs Error: {ex.Message}");
+                MessageBox.Show($"Error: {ex.Message}");
                 throw;
+            }
+            connection_.Close();
+
+            foreach (var col in drugsGridView.Columns)
+            {
+                (col as DataGridViewColumn).SortMode = DataGridViewColumnSortMode.NotSortable;
             }
         }
 
@@ -91,23 +126,26 @@ namespace Pharmacy.AdminForms
         private void FillCategories()
         {
             string query = "SELECT * FROM drugcategories;";
-            MySqlDataAdapter adapter = new MySqlDataAdapter(query, connection_);
+            MySqlDataAdapter adapter;
             categoriesDt_.Clear();
 
             try
             {
+                connection_.Open();
+                adapter = new MySqlDataAdapter(query, connection_);
                 adapter.Fill(categoriesDt_);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Categories Error: {ex.Message}");
+                MessageBox.Show($"Error: {ex.Message}");
                 throw;
             }
 
-            categoryComboBox.DisplayMember = "category_name";
-            categoryComboBox.ValueMember = "category_id";
-            categoryComboBox.DataSource = categoriesDt_;
-            categoryComboBox.SelectedItem = null;
+            connection_.Close();
+            categoryFilterComboBox.DisplayMember = "category_name";
+            categoryFilterComboBox.ValueMember = "category_id";
+            categoryFilterComboBox.DataSource = categoriesDt_;
+            categoryFilterComboBox.SelectedItem = null;
         }
 
 
@@ -141,6 +179,21 @@ namespace Pharmacy.AdminForms
         }
 
 
+        private void FillOrderingFields()
+        {
+            List<OrderFieldItem> orderFields = new List<OrderFieldItem>()
+            {
+                new OrderFieldItem("drug_id", "ID"),
+                new OrderFieldItem("drug_name", "Назвою"),
+                new OrderFieldItem("drug_price", "Ціною"),
+                new OrderFieldItem("drug_amount", "Кількістю на складі")
+            };
+            orderByComboBox.DataSource = orderFields;
+            orderByComboBox.DisplayMember = nameof(OrderFieldItem.Pseudonym);
+            orderByComboBox.SelectedIndex = 0;
+        }
+
+
         private DataRow GetSelectedDataRow()
         {
             if (drugsGridView.SelectedRows.Count == 0)
@@ -153,6 +206,7 @@ namespace Pharmacy.AdminForms
         }
 
 
+        #region form events
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -184,7 +238,25 @@ namespace Pharmacy.AdminForms
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            FillDrugs();
+            string str = searchString.Text;
+
+            foreach (var r in drugsGridView.Rows)
+            {
+                foreach (DataGridViewCell cell in (r as DataGridViewRow).Cells)
+                {
+                    if (str != "" && cell.Value.ToString().Contains(str))
+                    {
+                        cell.Style.BackColor = Color.Orange;
+                        cell.Style.SelectionBackColor = Color.Orange;
+                    }
+                    else
+                    {
+                        cell.Style.BackColor = drugsGridView.DefaultCellStyle.BackColor;
+                        cell.Style.SelectionBackColor =
+                            drugsGridView.DefaultCellStyle.SelectionBackColor;
+                    }
+                }
+            }
         }
 
 
@@ -224,10 +296,43 @@ namespace Pharmacy.AdminForms
         }
 
 
-        private void purchaseListToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PurchaseListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PurchaseListForm form = new PurchaseListForm();
             form.ShowDialog();
+        }
+
+
+        private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillDrugs();
+        }
+
+
+        private void DescendingCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            FillDrugs();
+        }
+
+
+        private void FilterButton_Click(object sender, EventArgs e)
+        {
+            FillDrugs();
+            FillSubstances();
+        }
+        #endregion
+
+
+        private class OrderFieldItem
+        {
+            public string FieldName { get; set; }
+            public string Pseudonym { get; set; }
+
+            public OrderFieldItem(string fieldName, string pseudonym)
+            {
+                FieldName = fieldName;
+                Pseudonym = pseudonym;
+            }
         }
     }
 }

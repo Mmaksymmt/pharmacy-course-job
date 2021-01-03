@@ -29,6 +29,7 @@ namespace Pharmacy.AdminForms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.idLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
@@ -46,12 +47,18 @@ namespace Pharmacy.AdminForms
             this.priceUpDown = new System.Windows.Forms.NumericUpDown();
             this.amountUpDown = new System.Windows.Forms.NumericUpDown();
             this.saveButton = new System.Windows.Forms.Button();
+            this.substGridView = new System.Windows.Forms.DataGridView();
             this.pharmacyDataSet1 = new Pharmacy.pharmacyDataSet();
             this.drugsTableAdapter1 = new Pharmacy.pharmacyDataSetTableAdapters.drugsTableAdapter();
+            this.substancesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.drugcategoriesTableAdapter1 = new Pharmacy.pharmacyDataSetTableAdapters.drugcategoriesTableAdapter();
+            this.addSubstButton = new System.Windows.Forms.Button();
+            this.removeSubstButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.priceUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amountUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pharmacyDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substancesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // idLabel
@@ -209,6 +216,14 @@ namespace Pharmacy.AdminForms
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // substGridView
+            // 
+            this.substGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.substGridView.Location = new System.Drawing.Point(301, 37);
+            this.substGridView.Name = "substGridView";
+            this.substGridView.Size = new System.Drawing.Size(494, 323);
+            this.substGridView.TabIndex = 18;
+            // 
             // pharmacyDataSet1
             // 
             this.pharmacyDataSet1.DataSetName = "pharmacyDataSet";
@@ -218,15 +233,43 @@ namespace Pharmacy.AdminForms
             // 
             this.drugsTableAdapter1.ClearBeforeFill = true;
             // 
+            // substancesBindingSource
+            // 
+            this.substancesBindingSource.DataMember = "drugssubstances";
+            this.substancesBindingSource.DataSource = this.pharmacyDataSet1;
+            // 
             // drugcategoriesTableAdapter1
             // 
             this.drugcategoriesTableAdapter1.ClearBeforeFill = true;
+            // 
+            // addSubstButton
+            // 
+            this.addSubstButton.Location = new System.Drawing.Point(404, 383);
+            this.addSubstButton.Name = "addSubstButton";
+            this.addSubstButton.Size = new System.Drawing.Size(75, 23);
+            this.addSubstButton.TabIndex = 19;
+            this.addSubstButton.Text = "Додати";
+            this.addSubstButton.UseVisualStyleBackColor = true;
+            this.addSubstButton.Click += new System.EventHandler(this.AddSubstButton_Click);
+            // 
+            // removeSubstButton
+            // 
+            this.removeSubstButton.Location = new System.Drawing.Point(649, 383);
+            this.removeSubstButton.Name = "removeSubstButton";
+            this.removeSubstButton.Size = new System.Drawing.Size(75, 23);
+            this.removeSubstButton.TabIndex = 20;
+            this.removeSubstButton.Text = "Видалити";
+            this.removeSubstButton.UseVisualStyleBackColor = true;
+            this.removeSubstButton.Click += new System.EventHandler(this.RemoveSubstButton_Click);
             // 
             // EditDrugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 450);
+            this.ClientSize = new System.Drawing.Size(902, 450);
+            this.Controls.Add(this.removeSubstButton);
+            this.Controls.Add(this.addSubstButton);
+            this.Controls.Add(this.substGridView);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.amountUpDown);
             this.Controls.Add(this.priceUpDown);
@@ -248,7 +291,9 @@ namespace Pharmacy.AdminForms
             this.Text = "EditDrugForm";
             ((System.ComponentModel.ISupportInitialize)(this.priceUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.amountUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pharmacyDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substancesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,6 +320,10 @@ namespace Pharmacy.AdminForms
         private pharmacyDataSet pharmacyDataSet1;
         private pharmacyDataSetTableAdapters.drugsTableAdapter drugsTableAdapter1;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.DataGridView substGridView;
+        private System.Windows.Forms.BindingSource substancesBindingSource;
         private pharmacyDataSetTableAdapters.drugcategoriesTableAdapter drugcategoriesTableAdapter1;
+        private System.Windows.Forms.Button addSubstButton;
+        private System.Windows.Forms.Button removeSubstButton;
     }
 }

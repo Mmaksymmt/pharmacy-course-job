@@ -32,7 +32,6 @@ namespace Pharmacy
                 new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             FillCategories();
             FillOrderingFields();
-            //FillTable();
             categoryFilterComboBox.SelectedItem = null;
         }
 
