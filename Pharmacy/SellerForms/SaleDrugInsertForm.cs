@@ -30,7 +30,7 @@ namespace Pharmacy
             FillCategories();
             FillOrderingFields();
             //FillTable();
-            categoryComboBox.SelectedItem = null;
+            categoryFilterComboBox.SelectedItem = null;
         }
 
 
@@ -51,11 +51,25 @@ namespace Pharmacy
 
         private void FillTable()
         {
-            DataRow categoryRow = (categoryComboBox.SelectedItem as DataRowView)?.Row;
+            DataRow categoryRow = (categoryFilterComboBox.SelectedItem as DataRowView)?.Row;
             string query;
             MySqlCommand command = new MySqlCommand() { Connection = connection_ };
             string orderField = (orderByComboBox.SelectedItem as OrderFieldItem).FieldName;
             string orderDirection = descendingCheckBox.Checked ? "DESC" : "ASC";
+            decimal minPriceFilter;
+            bool minPriceParced =
+                decimal.TryParse(minPriceFilterTextBox.Text, out minPriceFilter);
+            decimal maxPriceFilter;
+            bool maxPriceParced =
+                decimal.TryParse(maxPriceFilterTextBox.Text, out maxPriceFilter);
+            if (!minPriceParced)
+            {
+                minPriceFilter = 0;
+            }
+            if (!maxPriceParced)
+            {
+                maxPriceFilter = decimal.MaxValue;
+            }
 
             if (categoryRow == null)
             {
@@ -64,6 +78,10 @@ namespace Pharmacy
                     "FROM drugs INNER JOIN drugcategories " +
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
+                    "AND LOCATE(@manuf_filter, drug_manufacturer) > 0 " +
+                    "AND drug_price >= @min_price AND drug_price <= @max_price " +
+                    "AND drug_prescription_leave = @presc_filter " +
+                    "AND drug_amount >= @amount_filter " +
                     "AND drug_id NOT IN " +
                     "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id) " +
                     $"ORDER BY {orderField} {orderDirection};";
@@ -75,6 +93,10 @@ namespace Pharmacy
                     "FROM drugs INNER JOIN drugcategories " +
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
+                    "AND LOCATE(@manuf_filter, drug_manufacturer) > 0 " +
+                    "AND drug_price >= @min_price AND drug_price <= @max_price " +
+                    "AND drug_prescription_leave = @presc_filter " +
+                    "AND drug_amount >= @amount_filter " +
                     "AND drug_category_id = @category_id AND drug_id NOT IN " +
                     "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id) " +
                     $"ORDER BY {orderField} {orderDirection};";
@@ -82,7 +104,14 @@ namespace Pharmacy
                 command.Parameters.AddWithValue("@category_id", categoryId);
             }
             command.Parameters.AddWithValue("@sale_id", currentSaleId_);
-            command.Parameters.AddWithValue("@name_filter", nameTextBox.Text);
+            command.Parameters.AddWithValue("@name_filter", nameFilterTextBox.Text);
+            command.Parameters.AddWithValue("@manuf_filter", manufFilterTextBox.Text);
+            command.Parameters.AddWithValue("@min_price", minPriceFilter);
+            command.Parameters.AddWithValue("@max_price", maxPriceFilter);
+            command.Parameters.AddWithValue("@presc_filter", prescriptionFilterCheckBox.Checked);
+            command.Parameters.AddWithValue(
+                "@amount_filter",
+                leftInStockFilterCheckBox.Checked ? 1 : 0);
             command.CommandText = query;
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             drugsDt_.Rows.Clear();
@@ -125,10 +154,10 @@ namespace Pharmacy
             }
 
             connection_.Close();
-            categoryComboBox.DisplayMember = "category_name";
-            categoryComboBox.ValueMember = "category_id";
-            categoryComboBox.DataSource = categoriesDt_;
-            categoryComboBox.SelectedItem = null;
+            categoryFilterComboBox.DisplayMember = "category_name";
+            categoryFilterComboBox.ValueMember = "category_id";
+            categoryFilterComboBox.DataSource = categoriesDt_;
+            categoryFilterComboBox.SelectedItem = null;
         }
 
 
@@ -192,7 +221,7 @@ namespace Pharmacy
         }
 
 
-        private void SearchButton_Click(object sender, EventArgs e)
+        private void FilterButton_Click(object sender, EventArgs e)
         {
             FillTable();
         }
@@ -246,6 +275,42 @@ namespace Pharmacy
         }
 
 
+        private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillTable();
+        }
+
+
+        private void DescendingCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            FillTable();
+        }
+
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            string str = searchString.Text;
+
+            foreach (var r in drugsGridView.Rows)
+            {
+                foreach (DataGridViewCell cell in (r as DataGridViewRow).Cells)
+                {
+                    if (str != "" && cell.Value.ToString().Contains(str))
+                    {
+                        cell.Style.BackColor = Color.Orange;
+                        cell.Style.SelectionBackColor = Color.Orange;
+                    }
+                    else
+                    {
+                        cell.Style.BackColor = drugsGridView.DefaultCellStyle.BackColor;
+                        cell.Style.SelectionBackColor =
+                            drugsGridView.DefaultCellStyle.SelectionBackColor;
+                    }
+                }
+            }
+        }
+
+
         private class OrderFieldItem
         {
             public string FieldName { get; set; }
@@ -256,18 +321,6 @@ namespace Pharmacy
                 FieldName = fieldName;
                 Pseudonym = pseudonym;
             }
-        }
-
-
-        private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FillTable();
-        }
-
-
-        private void DescendingCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            FillTable();
         }
     }
 }
