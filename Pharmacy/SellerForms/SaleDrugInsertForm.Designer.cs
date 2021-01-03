@@ -41,7 +41,7 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.drugsGridView = new System.Windows.Forms.DataGridView();
-            this.dataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.drugsTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.filterButton = new System.Windows.Forms.Button();
             this.nameFilterTextBox = new System.Windows.Forms.TextBox();
             this.filterGroupBox = new System.Windows.Forms.GroupBox();
@@ -59,12 +59,26 @@
             this.searchGroupBox = new System.Windows.Forms.GroupBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchString = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.substancesGridView = new System.Windows.Forms.DataGridView();
+            this.substLabel = new System.Windows.Forms.Label();
+            this.substTextBox = new System.Windows.Forms.TextBox();
+            this.substTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTableBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.drugsTableBindingSource)).BeginInit();
             this.filterGroupBox.SuspendLayout();
             this.paramsGroupBox.SuspendLayout();
             this.searchGroupBox.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.substancesGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substTableBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // nameFilterLabel
@@ -149,7 +163,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(67, 465);
+            this.saveButton.Location = new System.Drawing.Point(49, 8);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 10;
@@ -159,7 +173,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(217, 465);
+            this.cancelButton.Location = new System.Drawing.Point(204, 8);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 11;
@@ -171,20 +185,21 @@
             // 
             this.drugsGridView.AllowUserToAddRows = false;
             this.drugsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.drugsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drugsGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.drugsGridView.Location = new System.Drawing.Point(369, 48);
+            this.drugsGridView.Location = new System.Drawing.Point(351, 43);
             this.drugsGridView.MultiSelect = false;
             this.drugsGridView.Name = "drugsGridView";
             this.drugsGridView.ReadOnly = true;
             this.drugsGridView.RowHeadersVisible = false;
             this.drugsGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.drugsGridView.Size = new System.Drawing.Size(581, 398);
+            this.drugsGridView.Size = new System.Drawing.Size(830, 338);
             this.drugsGridView.TabIndex = 12;
             this.drugsGridView.SelectionChanged += new System.EventHandler(this.DrugsGridView_SelectionChanged);
             // 
             // filterButton
             // 
-            this.filterButton.Location = new System.Drawing.Point(122, 164);
+            this.filterButton.Location = new System.Drawing.Point(121, 196);
             this.filterButton.Name = "filterButton";
             this.filterButton.Size = new System.Drawing.Size(84, 23);
             this.filterButton.TabIndex = 13;
@@ -201,6 +216,8 @@
             // 
             // filterGroupBox
             // 
+            this.filterGroupBox.Controls.Add(this.substLabel);
+            this.filterGroupBox.Controls.Add(this.substTextBox);
             this.filterGroupBox.Controls.Add(this.leftInStockFilterCheckBox);
             this.filterGroupBox.Controls.Add(this.prescriptionFilterCheckBox);
             this.filterGroupBox.Controls.Add(this.maxPriceFilterTextBox);
@@ -213,9 +230,9 @@
             this.filterGroupBox.Controls.Add(this.nameFilterTextBox);
             this.filterGroupBox.Controls.Add(this.categoryFilterLabel);
             this.filterGroupBox.Controls.Add(this.categoryFilterComboBox);
-            this.filterGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.filterGroupBox.Location = new System.Drawing.Point(3, 3);
             this.filterGroupBox.Name = "filterGroupBox";
-            this.filterGroupBox.Size = new System.Drawing.Size(335, 193);
+            this.filterGroupBox.Size = new System.Drawing.Size(335, 225);
             this.filterGroupBox.TabIndex = 15;
             this.filterGroupBox.TabStop = false;
             this.filterGroupBox.Text = "Фільтрація";
@@ -223,7 +240,7 @@
             // leftInStockFilterCheckBox
             // 
             this.leftInStockFilterCheckBox.AutoSize = true;
-            this.leftInStockFilterCheckBox.Location = new System.Drawing.Point(169, 141);
+            this.leftInStockFilterCheckBox.Location = new System.Drawing.Point(169, 167);
             this.leftInStockFilterCheckBox.Name = "leftInStockFilterCheckBox";
             this.leftInStockFilterCheckBox.Size = new System.Drawing.Size(83, 17);
             this.leftInStockFilterCheckBox.TabIndex = 25;
@@ -233,7 +250,7 @@
             // prescriptionFilterCheckBox
             // 
             this.prescriptionFilterCheckBox.AutoSize = true;
-            this.prescriptionFilterCheckBox.Location = new System.Drawing.Point(17, 143);
+            this.prescriptionFilterCheckBox.Location = new System.Drawing.Point(17, 169);
             this.prescriptionFilterCheckBox.Name = "prescriptionFilterCheckBox";
             this.prescriptionFilterCheckBox.Size = new System.Drawing.Size(91, 17);
             this.prescriptionFilterCheckBox.TabIndex = 24;
@@ -287,7 +304,7 @@
             this.paramsGroupBox.Controls.Add(this.amountLabel);
             this.paramsGroupBox.Controls.Add(this.inStockValueLabel);
             this.paramsGroupBox.Controls.Add(this.slashLabel);
-            this.paramsGroupBox.Location = new System.Drawing.Point(13, 346);
+            this.paramsGroupBox.Location = new System.Drawing.Point(3, 332);
             this.paramsGroupBox.Name = "paramsGroupBox";
             this.paramsGroupBox.Size = new System.Drawing.Size(335, 100);
             this.paramsGroupBox.TabIndex = 16;
@@ -296,7 +313,7 @@
             // orderByLabel
             // 
             this.orderByLabel.AutoSize = true;
-            this.orderByLabel.Location = new System.Drawing.Point(366, 24);
+            this.orderByLabel.Location = new System.Drawing.Point(3, 0);
             this.orderByLabel.Name = "orderByLabel";
             this.orderByLabel.Size = new System.Drawing.Size(93, 13);
             this.orderByLabel.TabIndex = 17;
@@ -306,7 +323,7 @@
             // 
             this.orderByComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.orderByComboBox.FormattingEnabled = true;
-            this.orderByComboBox.Location = new System.Drawing.Point(491, 21);
+            this.orderByComboBox.Location = new System.Drawing.Point(102, 3);
             this.orderByComboBox.Name = "orderByComboBox";
             this.orderByComboBox.Size = new System.Drawing.Size(121, 21);
             this.orderByComboBox.TabIndex = 18;
@@ -315,7 +332,7 @@
             // descendingCheckBox
             // 
             this.descendingCheckBox.AutoSize = true;
-            this.descendingCheckBox.Location = new System.Drawing.Point(641, 24);
+            this.descendingCheckBox.Location = new System.Drawing.Point(229, 3);
             this.descendingCheckBox.Name = "descendingCheckBox";
             this.descendingCheckBox.Size = new System.Drawing.Size(152, 17);
             this.descendingCheckBox.TabIndex = 19;
@@ -327,7 +344,7 @@
             // 
             this.searchGroupBox.Controls.Add(this.searchButton);
             this.searchGroupBox.Controls.Add(this.searchString);
-            this.searchGroupBox.Location = new System.Drawing.Point(13, 225);
+            this.searchGroupBox.Location = new System.Drawing.Point(3, 234);
             this.searchGroupBox.Name = "searchGroupBox";
             this.searchGroupBox.Size = new System.Drawing.Size(334, 92);
             this.searchGroupBox.TabIndex = 20;
@@ -346,38 +363,121 @@
             // 
             // searchString
             // 
-            this.searchString.Location = new System.Drawing.Point(49, 19);
+            this.searchString.Location = new System.Drawing.Point(17, 19);
             this.searchString.Name = "searchString";
-            this.searchString.Size = new System.Drawing.Size(230, 20);
+            this.searchString.Size = new System.Drawing.Size(301, 20);
             this.searchString.TabIndex = 15;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 348F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.drugsGridView, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.substancesGridView, 1, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.18996F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.81004F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 594);
+            this.tableLayoutPanel1.TabIndex = 21;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.filterGroupBox);
+            this.flowLayoutPanel1.Controls.Add(this.searchGroupBox);
+            this.flowLayoutPanel1.Controls.Add(this.paramsGroupBox);
+            this.flowLayoutPanel1.Controls.Add(this.panel1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.tableLayoutPanel1.SetRowSpan(this.flowLayoutPanel1, 3);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(342, 588);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.saveButton);
+            this.panel1.Controls.Add(this.cancelButton);
+            this.panel1.Location = new System.Drawing.Point(3, 438);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(334, 40);
+            this.panel1.TabIndex = 22;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.orderByLabel);
+            this.flowLayoutPanel2.Controls.Add(this.orderByComboBox);
+            this.flowLayoutPanel2.Controls.Add(this.descendingCheckBox);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(351, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(830, 34);
+            this.flowLayoutPanel2.TabIndex = 13;
+            // 
+            // substancesGridView
+            // 
+            this.substancesGridView.AllowUserToAddRows = false;
+            this.substancesGridView.AllowUserToDeleteRows = false;
+            this.substancesGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.substancesGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.substancesGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.substancesGridView.Location = new System.Drawing.Point(351, 387);
+            this.substancesGridView.MultiSelect = false;
+            this.substancesGridView.Name = "substancesGridView";
+            this.substancesGridView.ReadOnly = true;
+            this.substancesGridView.RowHeadersVisible = false;
+            this.substancesGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.substancesGridView.Size = new System.Drawing.Size(830, 204);
+            this.substancesGridView.TabIndex = 18;
+            // 
+            // substLabel
+            // 
+            this.substLabel.AutoSize = true;
+            this.substLabel.Location = new System.Drawing.Point(14, 146);
+            this.substLabel.Name = "substLabel";
+            this.substLabel.Size = new System.Drawing.Size(55, 13);
+            this.substLabel.TabIndex = 26;
+            this.substLabel.Text = "Речовина";
+            // 
+            // substTextBox
+            // 
+            this.substTextBox.Location = new System.Drawing.Point(88, 143);
+            this.substTextBox.Name = "substTextBox";
+            this.substTextBox.Size = new System.Drawing.Size(230, 20);
+            this.substTextBox.TabIndex = 27;
             // 
             // SaleDrugInsertForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 594);
-            this.Controls.Add(this.searchGroupBox);
-            this.Controls.Add(this.descendingCheckBox);
-            this.Controls.Add(this.orderByComboBox);
-            this.Controls.Add(this.orderByLabel);
-            this.Controls.Add(this.paramsGroupBox);
-            this.Controls.Add(this.filterGroupBox);
-            this.Controls.Add(this.drugsGridView);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.saveButton);
+            this.ClientSize = new System.Drawing.Size(1184, 594);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SaleDrugInsertForm";
             this.Text = "SaleDrugEditForm";
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTableBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.drugsTableBindingSource)).EndInit();
             this.filterGroupBox.ResumeLayout(false);
             this.filterGroupBox.PerformLayout();
             this.paramsGroupBox.ResumeLayout(false);
             this.paramsGroupBox.PerformLayout();
             this.searchGroupBox.ResumeLayout(false);
             this.searchGroupBox.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.substancesGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substTableBindingSource)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -397,7 +497,7 @@
         private System.Windows.Forms.DataGridView drugsGridView;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.TextBox nameFilterTextBox;
-        private System.Windows.Forms.BindingSource dataTableBindingSource;
+        private System.Windows.Forms.BindingSource drugsTableBindingSource;
         private System.Windows.Forms.GroupBox filterGroupBox;
         private System.Windows.Forms.GroupBox paramsGroupBox;
         private System.Windows.Forms.Label orderByLabel;
@@ -413,5 +513,13 @@
         private System.Windows.Forms.GroupBox searchGroupBox;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TextBox searchString;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.DataGridView substancesGridView;
+        private System.Windows.Forms.Label substLabel;
+        private System.Windows.Forms.TextBox substTextBox;
+        private System.Windows.Forms.BindingSource substTableBindingSource;
     }
 }

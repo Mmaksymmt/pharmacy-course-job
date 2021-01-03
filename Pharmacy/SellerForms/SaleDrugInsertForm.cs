@@ -16,14 +16,17 @@ namespace Pharmacy
         private MySqlConnection connection_;
         private DataTable drugsDt_ = new DataTable();
         private DataTable categoriesDt_ = new DataTable();
+        private DataTable substancesDt_ = new DataTable();
         private int currentSaleId_;
 
 
         public SaleDrugInsertForm(int saleId)
         {
             InitializeComponent();
-            dataTableBindingSource.DataSource = drugsDt_;
-            drugsGridView.DataSource = dataTableBindingSource;
+            drugsTableBindingSource.DataSource = drugsDt_;
+            drugsGridView.DataSource = drugsTableBindingSource;
+            substTableBindingSource.DataSource = substancesDt_;
+            substancesGridView.DataSource = substTableBindingSource;
             currentSaleId_ = saleId;
             connection_ =
                 new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
@@ -49,7 +52,7 @@ namespace Pharmacy
         }
 
 
-        private void FillTable()
+        private void FillDrugs()
         {
             DataRow categoryRow = (categoryFilterComboBox.SelectedItem as DataRowView)?.Row;
             string query;
@@ -84,7 +87,7 @@ namespace Pharmacy
                     "AND drug_amount >= @amount_filter " +
                     "AND drug_id NOT IN " +
                     "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id) " +
-                    $"ORDER BY {orderField} {orderDirection};";
+                    $"ORDER BY {orderField} {orderDirection}";
             }
             else
             {
@@ -99,15 +102,25 @@ namespace Pharmacy
                     "AND drug_amount >= @amount_filter " +
                     "AND drug_category_id = @category_id AND drug_id NOT IN " +
                     "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id) " +
-                    $"ORDER BY {orderField} {orderDirection};";
+                    $"ORDER BY {orderField} {orderDirection}";
                 int categoryId = Convert.ToInt32(categoryRow["category_id"]);
                 command.Parameters.AddWithValue("@category_id", categoryId);
+            }
+            if (substTextBox.Text.Length != 0)
+            {
+                query = $"SELECT T.drug_id, T.drug_name, T.category_name, drug_form, " +
+                    $"drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                    $"FROM drugssubstances INNER JOIN ({query}) AS T " +
+                    $"ON drugssubstances.drug_id = T.drug_id INNER JOIN substances " +
+                    $"ON drugssubstances.subst_id = substances.subst_id " +
+                    $"WHERE LOCATE(@subst_str, subst_name) > 0;";
             }
             command.Parameters.AddWithValue("@sale_id", currentSaleId_);
             command.Parameters.AddWithValue("@name_filter", nameFilterTextBox.Text);
             command.Parameters.AddWithValue("@manuf_filter", manufFilterTextBox.Text);
             command.Parameters.AddWithValue("@min_price", minPriceFilter);
             command.Parameters.AddWithValue("@max_price", maxPriceFilter);
+            command.Parameters.AddWithValue("@subst_str", substTextBox.Text);
             command.Parameters.AddWithValue("@presc_filter", prescriptionFilterCheckBox.Checked);
             command.Parameters.AddWithValue(
                 "@amount_filter",
@@ -161,6 +174,36 @@ namespace Pharmacy
         }
 
 
+        private void FillSubstances()
+        {
+            substancesDt_.Rows.Clear();
+            DataRow selectedRow = GetSelectedDrugRow();
+
+            if (selectedRow == null)
+            {
+                return;
+            }
+
+            MySqlConnection connection =
+                new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
+            int selectedDrugId = Convert.ToInt32(selectedRow["drug_id"]);
+            const string QUERY = "SELECT subst_name, drugsubst_amount, subst_description FROM drugssubstances INNER JOIN substances ON drugssubstances.subst_id = substances.subst_id WHERE drugssubstances.drug_id = @drug_id;";
+            MySqlCommand command = new MySqlCommand(QUERY, connection);
+            command.Parameters.AddWithValue("drug_id", selectedDrugId);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+
+            try
+            {
+                adapter.Fill(substancesDt_);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Substances Error: {ex.Message}");
+                throw;
+            }
+        }
+
+
         private DataRow GetSelectedDrugRow()
         {
             if (drugsGridView.SelectedRows.Count == 0)
@@ -187,6 +230,7 @@ namespace Pharmacy
         }
 
 
+        #region form events
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (GetSelectedDrugRow() == null)
@@ -223,12 +267,15 @@ namespace Pharmacy
 
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            FillTable();
+            FillDrugs();
+            FillSubstances();
         }
 
 
         private void DrugsGridView_SelectionChanged(object sender, EventArgs e)
         {
+            FillSubstances();
+
             if (GetSelectedDrugRow() == null)
             {
                 priceValueLabel.Text = string.Empty;
@@ -244,7 +291,6 @@ namespace Pharmacy
                 DataRow selected = GetSelectedDrugRow();
                 int inStockAmount = Convert.ToInt32(selected["drug_amount"]);
                 int price = Convert.ToInt32(selected["drug_price"]);
-                
                 if (inStockAmount == 0)
                 {
                     amountNumericUpDown.Minimum = 0;
@@ -264,7 +310,6 @@ namespace Pharmacy
                     saveButton.Enabled = true;
                 }
             }
-
             UpdatePriceLabel();
         }
 
@@ -277,13 +322,13 @@ namespace Pharmacy
 
         private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FillTable();
+            FillDrugs();
         }
 
 
         private void DescendingCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            FillTable();
+            FillDrugs();
         }
 
 
@@ -309,6 +354,7 @@ namespace Pharmacy
                 }
             }
         }
+        #endregion
 
 
         private class OrderFieldItem
