@@ -68,6 +68,7 @@
             this.descendingCheckBox = new System.Windows.Forms.CheckBox();
             this.editDrugButton = new System.Windows.Forms.Button();
             this.addDrugButton = new System.Windows.Forms.Button();
+            this.deleteDrugButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsTableBindingSource)).BeginInit();
@@ -402,9 +403,9 @@
             // 
             // editDrugButton
             // 
-            this.editDrugButton.Location = new System.Drawing.Point(171, 402);
+            this.editDrugButton.Location = new System.Drawing.Point(134, 356);
             this.editDrugButton.Name = "editDrugButton";
-            this.editDrugButton.Size = new System.Drawing.Size(110, 23);
+            this.editDrugButton.Size = new System.Drawing.Size(96, 23);
             this.editDrugButton.TabIndex = 23;
             this.editDrugButton.Text = "Редагувати ліки";
             this.editDrugButton.UseVisualStyleBackColor = true;
@@ -412,19 +413,30 @@
             // 
             // addDrugButton
             // 
-            this.addDrugButton.Location = new System.Drawing.Point(171, 446);
+            this.addDrugButton.Location = new System.Drawing.Point(13, 360);
             this.addDrugButton.Name = "addDrugButton";
-            this.addDrugButton.Size = new System.Drawing.Size(110, 23);
+            this.addDrugButton.Size = new System.Drawing.Size(96, 23);
             this.addDrugButton.TabIndex = 24;
             this.addDrugButton.Text = "Додати ліки";
             this.addDrugButton.UseVisualStyleBackColor = true;
             this.addDrugButton.Click += new System.EventHandler(this.AddDrugToolStripMenuItem_Click);
+            // 
+            // deleteDrugButton
+            // 
+            this.deleteDrugButton.Location = new System.Drawing.Point(251, 356);
+            this.deleteDrugButton.Name = "deleteDrugButton";
+            this.deleteDrugButton.Size = new System.Drawing.Size(96, 23);
+            this.deleteDrugButton.TabIndex = 25;
+            this.deleteDrugButton.Text = "Видалити ліки";
+            this.deleteDrugButton.UseVisualStyleBackColor = true;
+            this.deleteDrugButton.Click += new System.EventHandler(this.DeleteDrugsToolStripMenuItem_Click);
             // 
             // AdminMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 549);
+            this.Controls.Add(this.deleteDrugButton);
             this.Controls.Add(this.addDrugButton);
             this.Controls.Add(this.editDrugButton);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -494,5 +506,6 @@
         private System.Windows.Forms.CheckBox descendingCheckBox;
         private System.Windows.Forms.Button editDrugButton;
         private System.Windows.Forms.Button addDrugButton;
+        private System.Windows.Forms.Button deleteDrugButton;
     }
 }

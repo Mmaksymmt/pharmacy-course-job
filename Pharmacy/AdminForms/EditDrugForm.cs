@@ -86,6 +86,21 @@ namespace Pharmacy.AdminForms
             substAdapter_.InsertCommand.Parameters.Add(
                 "@amount", MySqlDbType.TinyText, 255, "drugsubst_amount");
 
+            // UPDATE query
+            const string UPDATE_QUERY =
+                "UPDATE drugssubstances " +
+                "SET drugsubst_amount = @amount " +
+                "WHERE drug_id = @drug_id AND subst_id = @subst_id";
+            substAdapter_.UpdateCommand = new MySqlCommand()
+            {
+                Connection = connection_,
+                CommandText = UPDATE_QUERY
+            };
+            substAdapter_.UpdateCommand.Parameters.Add(
+                "@subst_id", MySqlDbType.Int32, 4, "subst_id");
+            substAdapter_.UpdateCommand.Parameters.Add(
+                "@amount", MySqlDbType.TinyText, 255, "drugsubst_amount");
+
             // DELETE query
             const string DELETE_QUERY =
                 "DELETE FROM drugssubstances " +
@@ -98,12 +113,10 @@ namespace Pharmacy.AdminForms
             substAdapter_.DeleteCommand.Parameters.Add(
                 "@subst_id", MySqlDbType.Int32, 4, "subst_id");
 
-            if (currentDrugId_ != -1)
-            {   // Already existing drug
-                selectCommand.Parameters.AddWithValue("@drug_id", currentDrugId_);
-                substAdapter_.InsertCommand.Parameters.AddWithValue("@drug_id", currentDrugId_);
-                substAdapter_.DeleteCommand.Parameters.AddWithValue("@drug_id", currentDrugId_);
-            }
+            selectCommand.Parameters.AddWithValue("@drug_id", currentDrugId_);
+            substAdapter_.InsertCommand.Parameters.AddWithValue("@drug_id", currentDrugId_);
+            substAdapter_.DeleteCommand.Parameters.AddWithValue("@drug_id", currentDrugId_);
+            substAdapter_.UpdateCommand.Parameters.AddWithValue("@drug_id", currentDrugId_);
         }
 
 
@@ -130,10 +143,6 @@ namespace Pharmacy.AdminForms
             if (substAdapter_ == null)
             {
                 CreateSubstancesAdapter();
-            }
-            if (currentDrugId_ == -1)
-            {
-                return;
             }
 
             try
@@ -251,7 +260,38 @@ namespace Pharmacy.AdminForms
 
         private void AddSubstButton_Click(object sender, EventArgs e)
         {
+            AddSubstanceToDrugForm form =
+                new AddSubstanceToDrugForm(substancesDt_, currentDrugId_);
+            form.ShowDialog();
+        }
 
+
+        private void SubstGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            DataRow selected = GetSelectedSubstRow();
+            if (selected == null)
+            {
+                return;
+            }
+
+            substAmountTextBox.Text = selected.Field<string>("drugsubst_amount");
+        }
+
+        private void SaveAmountString_Click(object sender, EventArgs e)
+        {
+            DataRow selected = GetSelectedSubstRow();
+            if (selected == null)
+            {
+                return;
+            }
+
+            selected["drugsubst_amount"] = substAmountTextBox.Text;
+        }
+
+
+        private void CancelChangesButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

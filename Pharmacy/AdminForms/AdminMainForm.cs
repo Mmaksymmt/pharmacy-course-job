@@ -269,7 +269,6 @@ namespace Pharmacy.AdminForms
         private void DeleteDrugsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataRow selectedRow = GetSelectedDataRow();
-            
             if (selectedRow == null)
             {
                 return;
@@ -290,7 +289,6 @@ namespace Pharmacy.AdminForms
                 MessageBox.Show($"Error: {ex.Message}");
                 throw;
             }
-
             connection_.Close();
             FillDrugs();
         }

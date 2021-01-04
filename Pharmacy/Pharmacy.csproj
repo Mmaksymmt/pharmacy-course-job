@@ -109,6 +109,12 @@
     <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminForms\AddSubstanceToDrugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\AddSubstanceToDrugForm.Designer.cs">
+      <DependentUpon>AddSubstanceToDrugForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForms\AdminMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +179,9 @@
     <Compile Include="SellerForms\SellerMainForm.Designer.cs">
       <DependentUpon>SellerMainForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminForms\AddSubstanceToDrugForm.resx">
+      <DependentUpon>AddSubstanceToDrugForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\AdminMainForm.resx">
       <DependentUpon>AdminMainForm.cs</DependentUpon>
     </EmbeddedResource>
