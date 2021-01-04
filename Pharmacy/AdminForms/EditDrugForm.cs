@@ -29,6 +29,7 @@ namespace Pharmacy.AdminForms
             drugsTableAdapter1.Fill(pharmacyDataSet1.drugs);
             substGridView.DataSource = substancesBindingSource;
             substancesBindingSource.DataSource = substancesDt_;
+            RenameColumns();
         }
 
 
@@ -58,6 +59,15 @@ namespace Pharmacy.AdminForms
             prescriptionCheckBox.Checked = drugRow.drug_prescription_leave;
             priceUpDown.Value = drugRow.drug_price;
             amountUpDown.Value = drugRow.drug_amount;
+            RenameColumns();
+        }
+
+
+        private void RenameColumns()
+        {
+            substGridView.Columns[0].HeaderText = "ID речовини";
+            substGridView.Columns[1].HeaderText = "Назва";
+            substGridView.Columns[2].HeaderText = "Опис";
         }
 
 

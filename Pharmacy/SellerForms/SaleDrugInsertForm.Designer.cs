@@ -460,7 +460,7 @@
             this.ClientSize = new System.Drawing.Size(1184, 594);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SaleDrugInsertForm";
-            this.Text = "SaleDrugEditForm";
+            this.Text = "Додати ліки до продажу";
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsTableBindingSource)).EndInit();

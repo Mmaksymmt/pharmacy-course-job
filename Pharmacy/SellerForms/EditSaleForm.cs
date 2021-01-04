@@ -37,6 +37,11 @@ namespace Pharmacy
             CreateAdapter();
             FillData();
             DisableUnnecessaryControls();
+            salesDrugsGridView.Columns[0].HeaderText = "ID ліків";
+            salesDrugsGridView.Columns[1].HeaderText = "Назва";
+            salesDrugsGridView.Columns[2].HeaderText = "Кількість";
+            salesDrugsGridView.Columns[3].HeaderText = "Ціна за 1 шт.";
+            salesDrugsGridView.Columns[4].HeaderText = "Сума";
         }
 
 

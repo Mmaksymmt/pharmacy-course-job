@@ -162,7 +162,7 @@
             this.Controls.Add(this.priceValueLabel);
             this.Controls.Add(this.priceLabel);
             this.Name = "SaleDrugEditForm";
-            this.Text = "SaleDrugEditForm";
+            this.Text = "Редагування ліків";
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

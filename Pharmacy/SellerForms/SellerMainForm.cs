@@ -29,15 +29,22 @@ namespace Pharmacy
                 new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             CreateAdapter();
             FillData();
+            salesGridView.Columns[0].HeaderText = "ID продажу";
+            salesGridView.Columns[1].HeaderText = "Дата";
+            salesGridView.Columns[2].HeaderText = "Сума";
         }
 
 
         private void CreateAdapter()
         {
             const string QUERY =
-                "SELECT sale_id, sale_date FROM sales " +
+                "SELECT sales.sale_id, sale_date, " +
+                "SUM(salesdrugs_amount * salesdrugs_price) as price " +
+                "FROM sales LEFT JOIN salesdrugs ON sales.sale_id = salesdrugs.sale_id " +
                 "WHERE sale_seller_id = @sale_seller_id " +
-                "AND DATE(sale_date) = CURRENT_DATE() ORDER BY sale_date DESC;";
+                "AND DATE(sale_date) = CURRENT_DATE() " +
+                "GROUP BY sales.sale_id, sale_date " +
+                "ORDER BY sale_date DESC;";
             MySqlCommand command = new MySqlCommand(QUERY, connection_);
             command.Parameters.AddWithValue("@sale_seller_id", sellerId_);
             adapter_ = new MySqlDataAdapter(command);

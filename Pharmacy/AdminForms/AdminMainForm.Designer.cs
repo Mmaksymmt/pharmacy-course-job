@@ -413,7 +413,7 @@
             // 
             // addDrugButton
             // 
-            this.addDrugButton.Location = new System.Drawing.Point(13, 360);
+            this.addDrugButton.Location = new System.Drawing.Point(13, 356);
             this.addDrugButton.Name = "addDrugButton";
             this.addDrugButton.Size = new System.Drawing.Size(96, 23);
             this.addDrugButton.TabIndex = 24;

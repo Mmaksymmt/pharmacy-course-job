@@ -87,14 +87,14 @@ namespace Pharmacy.AdminForms
             // 
             this.nameTextBox.Location = new System.Drawing.Point(131, 40);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(151, 20);
             this.nameTextBox.TabIndex = 2;
             // 
             // formTextBox
             // 
             this.formTextBox.Location = new System.Drawing.Point(131, 74);
             this.formTextBox.Name = "formTextBox";
-            this.formTextBox.Size = new System.Drawing.Size(100, 20);
+            this.formTextBox.Size = new System.Drawing.Size(151, 20);
             this.formTextBox.TabIndex = 4;
             // 
             // formLabel
@@ -110,7 +110,7 @@ namespace Pharmacy.AdminForms
             // 
             this.manufacturerTextBox.Location = new System.Drawing.Point(131, 109);
             this.manufacturerTextBox.Name = "manufacturerTextBox";
-            this.manufacturerTextBox.Size = new System.Drawing.Size(100, 20);
+            this.manufacturerTextBox.Size = new System.Drawing.Size(151, 20);
             this.manufacturerTextBox.TabIndex = 6;
             // 
             // manufacturerLabel
@@ -126,7 +126,7 @@ namespace Pharmacy.AdminForms
             // 
             this.shelfLifeTextBox.Location = new System.Drawing.Point(131, 171);
             this.shelfLifeTextBox.Name = "shelfLifeTextBox";
-            this.shelfLifeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.shelfLifeTextBox.Size = new System.Drawing.Size(151, 20);
             this.shelfLifeTextBox.TabIndex = 8;
             // 
             // categoryLabel
@@ -153,7 +153,7 @@ namespace Pharmacy.AdminForms
             this.categoryComboBox.FormattingEnabled = true;
             this.categoryComboBox.Location = new System.Drawing.Point(131, 144);
             this.categoryComboBox.Name = "categoryComboBox";
-            this.categoryComboBox.Size = new System.Drawing.Size(121, 21);
+            this.categoryComboBox.Size = new System.Drawing.Size(151, 21);
             this.categoryComboBox.TabIndex = 10;
             // 
             // priceLabel
@@ -212,7 +212,7 @@ namespace Pharmacy.AdminForms
             // 
             // saveChangesButton
             // 
-            this.saveChangesButton.Location = new System.Drawing.Point(92, 337);
+            this.saveChangesButton.Location = new System.Drawing.Point(270, 415);
             this.saveChangesButton.Name = "saveChangesButton";
             this.saveChangesButton.Size = new System.Drawing.Size(75, 23);
             this.saveChangesButton.TabIndex = 17;
@@ -228,6 +228,7 @@ namespace Pharmacy.AdminForms
             this.substGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.substGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.substGridView.Location = new System.Drawing.Point(320, 37);
+            this.substGridView.MultiSelect = false;
             this.substGridView.Name = "substGridView";
             this.substGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.substGridView.Size = new System.Drawing.Size(458, 323);
@@ -236,7 +237,7 @@ namespace Pharmacy.AdminForms
             // 
             // addSubstButton
             // 
-            this.addSubstButton.Location = new System.Drawing.Point(398, 415);
+            this.addSubstButton.Location = new System.Drawing.Point(622, 371);
             this.addSubstButton.Name = "addSubstButton";
             this.addSubstButton.Size = new System.Drawing.Size(75, 23);
             this.addSubstButton.TabIndex = 19;
@@ -246,7 +247,7 @@ namespace Pharmacy.AdminForms
             // 
             // removeSubstButton
             // 
-            this.removeSubstButton.Location = new System.Drawing.Point(649, 415);
+            this.removeSubstButton.Location = new System.Drawing.Point(703, 371);
             this.removeSubstButton.Name = "removeSubstButton";
             this.removeSubstButton.Size = new System.Drawing.Size(75, 23);
             this.removeSubstButton.TabIndex = 20;
@@ -275,7 +276,7 @@ namespace Pharmacy.AdminForms
             // substAmountLabel
             // 
             this.substAmountLabel.AutoSize = true;
-            this.substAmountLabel.Location = new System.Drawing.Point(399, 378);
+            this.substAmountLabel.Location = new System.Drawing.Point(317, 376);
             this.substAmountLabel.Name = "substAmountLabel";
             this.substAmountLabel.Size = new System.Drawing.Size(106, 13);
             this.substAmountLabel.TabIndex = 21;
@@ -283,14 +284,14 @@ namespace Pharmacy.AdminForms
             // 
             // substAmountTextBox
             // 
-            this.substAmountTextBox.Location = new System.Drawing.Point(511, 375);
+            this.substAmountTextBox.Location = new System.Drawing.Point(429, 373);
             this.substAmountTextBox.Name = "substAmountTextBox";
             this.substAmountTextBox.Size = new System.Drawing.Size(100, 20);
             this.substAmountTextBox.TabIndex = 22;
             // 
             // saveAmountString
             // 
-            this.saveAmountString.Location = new System.Drawing.Point(617, 373);
+            this.saveAmountString.Location = new System.Drawing.Point(535, 371);
             this.saveAmountString.Name = "saveAmountString";
             this.saveAmountString.Size = new System.Drawing.Size(36, 23);
             this.saveAmountString.TabIndex = 23;
@@ -300,7 +301,7 @@ namespace Pharmacy.AdminForms
             // 
             // cancelChangesButton
             // 
-            this.cancelChangesButton.Location = new System.Drawing.Point(177, 337);
+            this.cancelChangesButton.Location = new System.Drawing.Point(454, 415);
             this.cancelChangesButton.Name = "cancelChangesButton";
             this.cancelChangesButton.Size = new System.Drawing.Size(75, 23);
             this.cancelChangesButton.TabIndex = 24;
@@ -338,7 +339,7 @@ namespace Pharmacy.AdminForms
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.idLabel);
             this.Name = "EditDrugForm";
-            this.Text = "EditDrugForm";
+            this.Text = "Редагування ліків";
             ((System.ComponentModel.ISupportInitialize)(this.priceUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.amountUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.substGridView)).EndInit();

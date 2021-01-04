@@ -33,6 +33,19 @@ namespace Pharmacy
             FillCategories();
             FillOrderingFields();
             categoryFilterComboBox.SelectedItem = null;
+            drugsGridView.Columns[0].HeaderText = "ID ліків";
+            drugsGridView.Columns[1].HeaderText = "Назва";
+            drugsGridView.Columns[2].HeaderText = "Категорія";
+            drugsGridView.Columns[3].HeaderText = "Форма випуску";
+            drugsGridView.Columns[4].HeaderText = "Виробник";
+            drugsGridView.Columns[5].HeaderText = "Термін придатності";
+            drugsGridView.Columns[6].HeaderText = "За рецептом";
+            drugsGridView.Columns[7].HeaderText = "Ціна";
+            drugsGridView.Columns[8].HeaderText = "На складі";
+
+            substancesGridView.Columns[0].HeaderText = "Речовина";
+            substancesGridView.Columns[1].HeaderText = "Вміст";
+            substancesGridView.Columns[2].HeaderText = "Опис";
         }
 
 

@@ -134,7 +134,7 @@ namespace Pharmacy.AdminForms
             this.Controls.Add(this.label1);
             this.Controls.Add(this.drugsGridView);
             this.Name = "PurchaseListForm";
-            this.Text = "PurchaseListForm";
+            this.Text = "Список до закупки";
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.priceUpDown)).EndInit();

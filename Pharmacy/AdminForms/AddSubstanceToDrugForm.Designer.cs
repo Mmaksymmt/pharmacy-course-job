@@ -34,11 +34,11 @@ namespace Pharmacy.AdminForms
             this.substancesTableAdapter1 = new Pharmacy.pharmacyDataSetTableAdapters.substancesTableAdapter();
             this.substBindingSouce = new System.Windows.Forms.BindingSource(this.components);
             this.substGridView = new System.Windows.Forms.DataGridView();
+            this.addButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.substidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.substnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.substdescriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pharmacyDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.substBindingSouce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.substGridView)).BeginInit();
@@ -78,24 +78,6 @@ namespace Pharmacy.AdminForms
             this.substGridView.Size = new System.Drawing.Size(494, 323);
             this.substGridView.TabIndex = 19;
             // 
-            // substidDataGridViewTextBoxColumn
-            // 
-            this.substidDataGridViewTextBoxColumn.DataPropertyName = "subst_id";
-            this.substidDataGridViewTextBoxColumn.HeaderText = "subst_id";
-            this.substidDataGridViewTextBoxColumn.Name = "substidDataGridViewTextBoxColumn";
-            // 
-            // substnameDataGridViewTextBoxColumn
-            // 
-            this.substnameDataGridViewTextBoxColumn.DataPropertyName = "subst_name";
-            this.substnameDataGridViewTextBoxColumn.HeaderText = "subst_name";
-            this.substnameDataGridViewTextBoxColumn.Name = "substnameDataGridViewTextBoxColumn";
-            // 
-            // substdescriptionDataGridViewTextBoxColumn
-            // 
-            this.substdescriptionDataGridViewTextBoxColumn.DataPropertyName = "subst_description";
-            this.substdescriptionDataGridViewTextBoxColumn.HeaderText = "subst_description";
-            this.substdescriptionDataGridViewTextBoxColumn.Name = "substdescriptionDataGridViewTextBoxColumn";
-            // 
             // addButton
             // 
             this.addButton.Location = new System.Drawing.Point(115, 341);
@@ -116,16 +98,34 @@ namespace Pharmacy.AdminForms
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // substidDataGridViewTextBoxColumn
+            // 
+            this.substidDataGridViewTextBoxColumn.DataPropertyName = "subst_id";
+            this.substidDataGridViewTextBoxColumn.HeaderText = "ID речовини";
+            this.substidDataGridViewTextBoxColumn.Name = "substidDataGridViewTextBoxColumn";
+            // 
+            // substnameDataGridViewTextBoxColumn
+            // 
+            this.substnameDataGridViewTextBoxColumn.DataPropertyName = "subst_name";
+            this.substnameDataGridViewTextBoxColumn.HeaderText = "Назва";
+            this.substnameDataGridViewTextBoxColumn.Name = "substnameDataGridViewTextBoxColumn";
+            // 
+            // substdescriptionDataGridViewTextBoxColumn
+            // 
+            this.substdescriptionDataGridViewTextBoxColumn.DataPropertyName = "subst_description";
+            this.substdescriptionDataGridViewTextBoxColumn.HeaderText = "Опис";
+            this.substdescriptionDataGridViewTextBoxColumn.Name = "substdescriptionDataGridViewTextBoxColumn";
+            // 
             // AddSubstanceToDrugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 450);
+            this.ClientSize = new System.Drawing.Size(540, 373);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.substGridView);
             this.Name = "AddSubstanceToDrugForm";
-            this.Text = "AddSubstanceToDrugForm";
+            this.Text = "Додавання речовини до ліків";
             ((System.ComponentModel.ISupportInitialize)(this.pharmacyDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.substBindingSouce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.substGridView)).EndInit();
@@ -139,10 +139,10 @@ namespace Pharmacy.AdminForms
         private pharmacyDataSetTableAdapters.substancesTableAdapter substancesTableAdapter1;
         private System.Windows.Forms.BindingSource substBindingSouce;
         private System.Windows.Forms.DataGridView substGridView;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn substidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn substnameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn substdescriptionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.Button cancelButton;
     }
 }
