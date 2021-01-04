@@ -246,9 +246,9 @@
             this.prescriptionFilterCheckBox.AutoSize = true;
             this.prescriptionFilterCheckBox.Location = new System.Drawing.Point(17, 169);
             this.prescriptionFilterCheckBox.Name = "prescriptionFilterCheckBox";
-            this.prescriptionFilterCheckBox.Size = new System.Drawing.Size(91, 17);
+            this.prescriptionFilterCheckBox.Size = new System.Drawing.Size(124, 17);
             this.prescriptionFilterCheckBox.TabIndex = 24;
-            this.prescriptionFilterCheckBox.Text = "За рецептом";
+            this.prescriptionFilterCheckBox.Text = "Тільки без рецепта";
             this.prescriptionFilterCheckBox.UseVisualStyleBackColor = true;
             // 
             // maxPriceFilterTextBox

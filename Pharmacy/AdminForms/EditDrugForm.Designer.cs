@@ -227,10 +227,10 @@ namespace Pharmacy.AdminForms
             this.substGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.substGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.substGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.substGridView.Location = new System.Drawing.Point(301, 37);
+            this.substGridView.Location = new System.Drawing.Point(320, 37);
             this.substGridView.Name = "substGridView";
             this.substGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.substGridView.Size = new System.Drawing.Size(494, 323);
+            this.substGridView.Size = new System.Drawing.Size(458, 323);
             this.substGridView.TabIndex = 18;
             this.substGridView.SelectionChanged += new System.EventHandler(this.SubstGridView_SelectionChanged);
             // 

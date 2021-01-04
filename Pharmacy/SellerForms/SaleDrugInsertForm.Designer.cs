@@ -45,6 +45,8 @@
             this.filterButton = new System.Windows.Forms.Button();
             this.nameFilterTextBox = new System.Windows.Forms.TextBox();
             this.filterGroupBox = new System.Windows.Forms.GroupBox();
+            this.substLabel = new System.Windows.Forms.Label();
+            this.substTextBox = new System.Windows.Forms.TextBox();
             this.leftInStockFilterCheckBox = new System.Windows.Forms.CheckBox();
             this.prescriptionFilterCheckBox = new System.Windows.Forms.CheckBox();
             this.maxPriceFilterTextBox = new System.Windows.Forms.TextBox();
@@ -64,8 +66,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.substancesGridView = new System.Windows.Forms.DataGridView();
-            this.substLabel = new System.Windows.Forms.Label();
-            this.substTextBox = new System.Windows.Forms.TextBox();
             this.substTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.amountNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).BeginInit();
@@ -237,6 +237,22 @@
             this.filterGroupBox.TabStop = false;
             this.filterGroupBox.Text = "Фільтрація";
             // 
+            // substLabel
+            // 
+            this.substLabel.AutoSize = true;
+            this.substLabel.Location = new System.Drawing.Point(14, 146);
+            this.substLabel.Name = "substLabel";
+            this.substLabel.Size = new System.Drawing.Size(55, 13);
+            this.substLabel.TabIndex = 26;
+            this.substLabel.Text = "Речовина";
+            // 
+            // substTextBox
+            // 
+            this.substTextBox.Location = new System.Drawing.Point(88, 143);
+            this.substTextBox.Name = "substTextBox";
+            this.substTextBox.Size = new System.Drawing.Size(230, 20);
+            this.substTextBox.TabIndex = 27;
+            // 
             // leftInStockFilterCheckBox
             // 
             this.leftInStockFilterCheckBox.AutoSize = true;
@@ -252,9 +268,9 @@
             this.prescriptionFilterCheckBox.AutoSize = true;
             this.prescriptionFilterCheckBox.Location = new System.Drawing.Point(17, 169);
             this.prescriptionFilterCheckBox.Name = "prescriptionFilterCheckBox";
-            this.prescriptionFilterCheckBox.Size = new System.Drawing.Size(91, 17);
+            this.prescriptionFilterCheckBox.Size = new System.Drawing.Size(124, 17);
             this.prescriptionFilterCheckBox.TabIndex = 24;
-            this.prescriptionFilterCheckBox.Text = "За рецептом";
+            this.prescriptionFilterCheckBox.Text = "Тільки без рецепта";
             this.prescriptionFilterCheckBox.UseVisualStyleBackColor = true;
             // 
             // maxPriceFilterTextBox
@@ -436,22 +452,6 @@
             this.substancesGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.substancesGridView.Size = new System.Drawing.Size(830, 204);
             this.substancesGridView.TabIndex = 18;
-            // 
-            // substLabel
-            // 
-            this.substLabel.AutoSize = true;
-            this.substLabel.Location = new System.Drawing.Point(14, 146);
-            this.substLabel.Name = "substLabel";
-            this.substLabel.Size = new System.Drawing.Size(55, 13);
-            this.substLabel.TabIndex = 26;
-            this.substLabel.Text = "Речовина";
-            // 
-            // substTextBox
-            // 
-            this.substTextBox.Location = new System.Drawing.Point(88, 143);
-            this.substTextBox.Name = "substTextBox";
-            this.substTextBox.Size = new System.Drawing.Size(230, 20);
-            this.substTextBox.TabIndex = 27;
             // 
             // SaleDrugInsertForm
             // 

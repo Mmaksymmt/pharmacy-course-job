@@ -34,7 +34,8 @@ namespace Pharmacy
 
         private void CreateAdapter()
         {
-            const string QUERY = "SELECT sale_id, sale_date FROM sales " +
+            const string QUERY =
+                "SELECT sale_id, sale_date FROM sales " +
                 "WHERE sale_seller_id = @sale_seller_id " +
                 "AND DATE(sale_date) = CURRENT_DATE() ORDER BY sale_date DESC;";
             MySqlCommand command = new MySqlCommand(QUERY, connection_);

@@ -58,15 +58,15 @@ namespace Pharmacy.AdminForms
             prescriptionCheckBox.Checked = drugRow.drug_prescription_leave;
             priceUpDown.Value = drugRow.drug_price;
             amountUpDown.Value = drugRow.drug_amount;
-
-            //TODO: fix shelf life DBNull
         }
 
 
         private void CreateSubstancesAdapter()
         {
+            // SELECT query
             MySqlCommand selectCommand = new MySqlCommand() { Connection = connection_ };
-            const string SELECT_QUERY = "SELECT subst_id, subst_name, drugsubst_amount " +
+            const string SELECT_QUERY =
+                "SELECT subst_id, subst_name, drugsubst_amount " +
                 "FROM drugssubstances NATURAL JOIN substances " +
                 "WHERE drug_id = @drug_id";
             selectCommand.CommandText = SELECT_QUERY;
@@ -172,22 +172,6 @@ namespace Pharmacy.AdminForms
             drugRow.drug_price = priceUpDown.Value;
             drugRow.drug_amount = (uint)amountUpDown.Value;
             pharmacyDataSet1.drugs.AdddrugsRow(drugRow);
-
-            const string QUERY = "SELECT LAST_INSERT_ID();";
-            MySqlDataReader sqlReader;
-            try
-            {
-                connection_.Open();
-                sqlReader = new MySqlCommand(QUERY, connection_).ExecuteReader();
-                sqlReader.Read();
-                currentDrugId_ = sqlReader.GetInt32(0);
-                connection_.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-                throw;
-            }
         }
 
 
@@ -235,6 +219,17 @@ namespace Pharmacy.AdminForms
             try
             {
                 drugsTableAdapter1.Update(pharmacyDataSet1.drugs);
+                if (currentDrugId_ == -1)
+                {
+                    const string QUERY = "SELECT MAX(drug_id) as last_id FROM drugs;";
+                    connection_.Open();
+                    MySqlDataReader sqlReader =
+                        new MySqlCommand(QUERY, connection_).ExecuteReader();
+                    sqlReader.Read();
+                    currentDrugId_ = sqlReader.GetInt32(0);
+                    connection_.Close();
+                }
+                substAdapter_.InsertCommand.Parameters["@drug_id"].Value = currentDrugId_;
                 substAdapter_.Update(substancesDt_);
             }
             catch (Exception ex)
@@ -276,6 +271,7 @@ namespace Pharmacy.AdminForms
 
             substAmountTextBox.Text = selected.Field<string>("drugsubst_amount");
         }
+
 
         private void SaveAmountString_Click(object sender, EventArgs e)
         {

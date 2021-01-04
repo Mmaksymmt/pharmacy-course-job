@@ -78,6 +78,7 @@ namespace Pharmacy.AdminForms
 
             DataRow newRow = substancesDtLocal_.NewRow();
             newRow.ItemArray = selected.ItemArray;
+            newRow["drugsubst_amount"] = null;
             substancesDtLocal_.Rows.Add(newRow);
             Close();
         }

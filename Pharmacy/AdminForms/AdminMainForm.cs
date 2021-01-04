@@ -56,26 +56,30 @@ namespace Pharmacy.AdminForms
             if (categoryRow == null)
             {
                 query = "SELECT drug_id, drug_name, drugcategories.category_name, drug_form, " +
-                    "drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                    "drug_manufacturer, drug_shelf_life, drug_prescription_leave, drug_price, " +
+                    "drug_amount " +
                     "FROM drugs INNER JOIN drugcategories " +
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
                     "AND LOCATE(@manuf_filter, drug_manufacturer) > 0 " +
                     "AND drug_price >= @min_price AND drug_price <= @max_price " +
-                    "AND drug_prescription_leave = @presc_filter " +
+                    "AND (drug_prescription_leave = 0 " +
+                    "   OR drug_prescription_leave != @presc_filter) " +
                     "AND drug_amount >= @amount_filter " +
                     $"ORDER BY {orderField} {orderDirection}";
             }
             else
             {
                 query = "SELECT drug_id, drug_name, drugcategories.category_name, drug_form, " +
-                    "drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                    "drug_manufacturer, drug_shelf_life, drug_prescription_leave, drug_price, " +
+                    "drug_amount " +
                     "FROM drugs INNER JOIN drugcategories " +
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
                     "AND LOCATE(@manuf_filter, drug_manufacturer) > 0 " +
                     "AND drug_price >= @min_price AND drug_price <= @max_price " +
-                    "AND drug_prescription_leave = @presc_filter " +
+                    "AND (drug_prescription_leave = 0 " +
+                    "   OR drug_prescription_leave != @presc_filter) " +
                     "AND drug_amount >= @amount_filter " +
                     "AND drug_category_id = @category_id " +
                     $"ORDER BY {orderField} {orderDirection}";
@@ -85,7 +89,8 @@ namespace Pharmacy.AdminForms
             if (substTextBox.Text.Length != 0)
             {
                 query = $"SELECT T.drug_id, T.drug_name, T.category_name, drug_form, " +
-                    $"drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                    $"drug_manufacturer, drug_shelf_life, drug_prescription_leave, " +
+                    $"drug_price, drug_amount " +
                     $"FROM drugssubstances INNER JOIN ({query}) AS T " +
                     $"ON drugssubstances.drug_id = T.drug_id INNER JOIN substances " +
                     $"ON drugssubstances.subst_id = substances.subst_id " +

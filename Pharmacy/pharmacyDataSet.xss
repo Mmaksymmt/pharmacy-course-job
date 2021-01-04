@@ -7,7 +7,7 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="-10" ViewPortY="-47" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:drugcategories" ZOrder="16" X="70" Y="70" Height="134" Width="232" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
-    <Shape ID="DesignTable:drugs" ZOrder="2" X="371" Y="70" Height="248" Width="177" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
+    <Shape ID="DesignTable:drugs" ZOrder="2" X="371" Y="69" Height="248" Width="177" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
     <Shape ID="DesignTable:drugssubstances" ZOrder="9" X="367" Y="395" Height="172" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
     <Shape ID="DesignTable:sales" ZOrder="8" X="589" Y="24" Height="134" Width="172" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
     <Shape ID="DesignTable:salesdrugs" ZOrder="7" X="713" Y="495" Height="172" Width="205" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
@@ -20,11 +20,11 @@
       <RoutePoints>
         <Point>
           <X>302</X>
-          <Y>137</Y>
+          <Y>136</Y>
         </Point>
         <Point>
           <X>371</X>
-          <Y>137</Y>
+          <Y>136</Y>
         </Point>
       </RoutePoints>
     </Connector>
@@ -32,7 +32,7 @@
       <RoutePoints>
         <Point>
           <X>459</X>
-          <Y>318</Y>
+          <Y>317</Y>
         </Point>
         <Point>
           <X>459</X>
@@ -88,7 +88,7 @@
       <RoutePoints>
         <Point>
           <X>531</X>
-          <Y>318</Y>
+          <Y>317</Y>
         </Point>
         <Point>
           <X>531</X>

@@ -33,12 +33,11 @@ namespace Pharmacy.AdminForms
         private void CreateListButton_Click(object sender, EventArgs e)
         {
             const string QUERY =
-                "SELECT drug_id, drug_name, drug_price, drug_amount, IFNULL(sold, 0) as sold " +
-                "FROM " +
-                "(SELECT drug_id, drug_name, drug_price, drug_amount, " +
-                "(SELECT SUM(salesdrugs_amount) FROM salesdrugs " +
-                "WHERE salesdrugs.drug_id = drugs.drug_id) as sold FROM drugs) " +
-                "AS T ORDER BY sold DESC";
+                "SELECT drugs.drug_id, drug_name, drug_price, drug_amount, " +
+                "IFNULL(SUM(salesdrugs_amount), 0) as sold " +
+                "FROM drugs LEFT JOIN salesdrugs ON drugs.drug_id = salesdrugs.drug_id " +
+                "GROUP BY drug_id, drug_name, drug_price, drug_amount " +
+                "ORDER BY sold DESC";
 
             MySqlCommand command = new MySqlCommand(QUERY, connection_);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);

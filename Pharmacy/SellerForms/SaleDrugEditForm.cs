@@ -46,7 +46,6 @@ namespace Pharmacy.SellerForms
             adapter_ = new MySqlDataAdapter(command);
 
             // UPDATE query
-
             const string UPDATE_QUERY =
                 "UPDATE salesdrugs SET salesdrugs_amount = @sdAmount" +
                 " WHERE sale_id = @sale_id AND drug_id = @drug_id;";
@@ -96,7 +95,8 @@ namespace Pharmacy.SellerForms
 
         private int GetDrugsInStock()
         {
-            const string QUERY = "SELECT drug_amount FROM drugs WHERE drug_id=@drug_id";
+            const string QUERY =
+                "SELECT drug_amount FROM drugs WHERE drug_id=@drug_id";
             MySqlCommand command = new MySqlCommand(QUERY, connection_);
             command.Parameters.AddWithValue("@drug_id", drugId_);
             MySqlDataReader reader;

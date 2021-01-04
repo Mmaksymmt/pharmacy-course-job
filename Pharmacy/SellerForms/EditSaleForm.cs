@@ -80,8 +80,9 @@ namespace Pharmacy
 
             // DELETE command
 
-            const string DELETE_QUERY = "DELETE FROM salesdrugs WHERE sale_id = @sale_id" +
-                " AND drug_id = @drug_id"; ;
+            const string DELETE_QUERY =
+                "DELETE FROM salesdrugs " +
+                "WHERE sale_id = @sale_id AND drug_id = @drug_id"; ;
             MySqlCommand deleteCommand = new MySqlCommand(DELETE_QUERY, connection_);
             deleteCommand.Parameters.AddWithValue("@sale_id", currentSaleId_);
             var param = 
@@ -93,7 +94,8 @@ namespace Pharmacy
 
         private void InsertSale()
         {
-            string query = $"INSERT INTO sales (sale_seller_id) VALUES ({sellerId_});" +
+            string query =
+                $"INSERT INTO sales (sale_seller_id) VALUES ({sellerId_});" +
                 "SELECT LAST_INSERT_ID();";
             MySqlCommand command = new MySqlCommand(query, connection_);
             MySqlDataReader reader;
@@ -110,7 +112,6 @@ namespace Pharmacy
                 MessageBox.Show($"Error: {ex.Message}");
                 Close();
             }
-
             connection_.Close();
         }
 
@@ -129,7 +130,6 @@ namespace Pharmacy
                 MessageBox.Show($"Error: {ex.Message}");
                 throw;
             }
-
             connection_.Close();
         }
 
@@ -148,7 +148,6 @@ namespace Pharmacy
                 MessageBox.Show($"Error: {ex.Message}");
                 throw;
             }
-
             connection_.Close();
             FillData();
         }
@@ -169,7 +168,6 @@ namespace Pharmacy
                 MessageBox.Show($"Error: {ex.Message}");
                 FillData();
             }
-
             connection_.Close();
             Close();
         }

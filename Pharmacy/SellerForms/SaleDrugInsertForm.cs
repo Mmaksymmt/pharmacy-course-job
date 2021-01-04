@@ -75,14 +75,17 @@ namespace Pharmacy
 
             if (categoryRow == null)
             {
-                query = "SELECT drug_id, drug_name, drugcategories.category_name, drug_form, " +
-                    "drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                query =
+                    "SELECT drug_id, drug_name, drugcategories.category_name, drug_form, " +
+                    "drug_manufacturer, drug_shelf_life, drug_prescription_leave, drug_price, " +
+                    "drug_amount " +
                     "FROM drugs INNER JOIN drugcategories " +
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
                     "AND LOCATE(@manuf_filter, drug_manufacturer) > 0 " +
                     "AND drug_price >= @min_price AND drug_price <= @max_price " +
-                    "AND drug_prescription_leave = @presc_filter " +
+                    "AND (drug_prescription_leave = 0 " +
+                    "   OR drug_prescription_leave != @presc_filter) " +
                     "AND drug_amount >= @amount_filter " +
                     "AND drug_id NOT IN " +
                     "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id) " +
@@ -91,13 +94,15 @@ namespace Pharmacy
             else
             {
                 query = "SELECT drug_id, drug_name, drugcategories.category_name, drug_form, " +
-                    "drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                    "drug_manufacturer, drug_shelf_life, drug_prescription_leave, drug_price, " +
+                    "drug_amount " +
                     "FROM drugs INNER JOIN drugcategories " +
                     "ON drugs.drug_category_id = drugcategories.category_id " +
                     "WHERE LOCATE(@name_filter, drug_name) > 0 " +
                     "AND LOCATE(@manuf_filter, drug_manufacturer) > 0 " +
                     "AND drug_price >= @min_price AND drug_price <= @max_price " +
-                    "AND drug_prescription_leave = @presc_filter " +
+                    "AND (drug_prescription_leave = 0 " +
+                    "   OR drug_prescription_leave != @presc_filter) " +
                     "AND drug_amount >= @amount_filter " +
                     "AND drug_category_id = @category_id AND drug_id NOT IN " +
                     "(SELECT drug_id FROM salesdrugs WHERE salesdrugs.sale_id = @sale_id) " +
@@ -107,8 +112,10 @@ namespace Pharmacy
             }
             if (substTextBox.Text.Length != 0)
             {
-                query = $"SELECT T.drug_id, T.drug_name, T.category_name, drug_form, " +
-                    $"drug_manufacturer, drug_prescription_leave, drug_price, drug_amount " +
+                query =
+                    $"SELECT T.drug_id, T.drug_name, T.category_name, drug_form, " +
+                    $"drug_manufacturer, drug_shelf_life, drug_prescription_leave, " +
+                    $"drug_price, drug_amount " +
                     $"FROM drugssubstances INNER JOIN ({query}) AS T " +
                     $"ON drugssubstances.drug_id = T.drug_id INNER JOIN substances " +
                     $"ON drugssubstances.subst_id = substances.subst_id " +
@@ -186,7 +193,11 @@ namespace Pharmacy
             MySqlConnection connection =
                 new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             int selectedDrugId = Convert.ToInt32(selectedRow["drug_id"]);
-            const string QUERY = "SELECT subst_name, drugsubst_amount, subst_description FROM drugssubstances INNER JOIN substances ON drugssubstances.subst_id = substances.subst_id WHERE drugssubstances.drug_id = @drug_id;";
+            const string QUERY =
+                "SELECT subst_name, drugsubst_amount, subst_description " +
+                "FROM drugssubstances INNER JOIN substances " +
+                "ON drugssubstances.subst_id = substances.subst_id " +
+                "WHERE drugssubstances.drug_id = @drug_id;";
             MySqlCommand command = new MySqlCommand(QUERY, connection);
             command.Parameters.AddWithValue("drug_id", selectedDrugId);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -238,8 +249,11 @@ namespace Pharmacy
             }
 
             DataRow selected = GetSelectedDrugRow();
-            string query = $"INSERT INTO salesdrugs (sale_id, drug_id, salesdrugs_amount) " +
+            string query =
+                $"INSERT INTO salesdrugs (sale_id, drug_id, salesdrugs_amount) " +
                 $"VALUES ({currentSaleId_}, {selected["drug_id"]}, {amountNumericUpDown.Value});";
+
+            // TODO: replace {} with Sql parameters
             MySqlCommand command = new MySqlCommand(query, connection_);
 
             try
