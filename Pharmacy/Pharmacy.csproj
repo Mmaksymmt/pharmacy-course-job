@@ -127,6 +127,12 @@
     <Compile Include="AdminForms\CategoriesForm.Designer.cs">
       <DependentUpon>CategoriesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminForms\DrugsToBuyReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\DrugsToBuyReportForm.Designer.cs">
+      <DependentUpon>DrugsToBuyReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForms\EditCategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     <EmbeddedResource Include="AdminForms\CategoriesForm.resx">
       <DependentUpon>CategoriesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\DrugsToBuyReportForm.resx">
+      <DependentUpon>DrugsToBuyReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\EditCategoryForm.resx">
       <DependentUpon>EditCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +238,7 @@
       <DependentUpon>SubstancesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerCheckReport.rdlc" />
+    <EmbeddedResource Include="DrugsToBuy.rdlc" />
     <EmbeddedResource Include="SellerForms\EditSaleForm.resx">
       <DependentUpon>EditSaleForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -268,6 +278,7 @@
     <None Include="pharmacyDataSet.xss">
       <DependentUpon>pharmacyDataSet.xsd</DependentUpon>
     </None>
+    <None Include="Properties\DataSources\Pharmacy.AdminForms.PurchaseListForm.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

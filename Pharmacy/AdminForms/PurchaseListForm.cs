@@ -130,7 +130,7 @@ namespace Pharmacy.AdminForms
         }
 
 
-        private class DrugItem
+        public class DrugItem
         {
             public int Id { get; set; }
             public string Name { get; set; }
@@ -153,6 +153,13 @@ namespace Pharmacy.AdminForms
                 Amount = amount;
                 Sold = sold;
             }
+        }
+
+
+        private void MakeDocumentButton_Click(object sender, EventArgs e)
+        {
+            DrugsToBuyReportForm form = new DrugsToBuyReportForm(drugItems_);
+            form.ShowDialog();
         }
     }
 }

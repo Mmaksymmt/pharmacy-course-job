@@ -38,6 +38,7 @@ namespace Pharmacy.AdminForms
             this.stockUpDown = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.totalPriceLabel = new System.Windows.Forms.Label();
+            this.makeDocumentButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.priceUpDown)).BeginInit();
@@ -121,11 +122,22 @@ namespace Pharmacy.AdminForms
             this.totalPriceLabel.TabIndex = 9;
             this.totalPriceLabel.Text = "Total";
             // 
+            // makeDocumentButton
+            // 
+            this.makeDocumentButton.Location = new System.Drawing.Point(337, 444);
+            this.makeDocumentButton.Name = "makeDocumentButton";
+            this.makeDocumentButton.Size = new System.Drawing.Size(155, 23);
+            this.makeDocumentButton.TabIndex = 10;
+            this.makeDocumentButton.Text = "Створити документ";
+            this.makeDocumentButton.UseVisualStyleBackColor = true;
+            this.makeDocumentButton.Click += new System.EventHandler(this.MakeDocumentButton_Click);
+            // 
             // PurchaseListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 491);
+            this.Controls.Add(this.makeDocumentButton);
             this.Controls.Add(this.totalPriceLabel);
             this.Controls.Add(this.stockUpDown);
             this.Controls.Add(this.label2);
@@ -154,5 +166,6 @@ namespace Pharmacy.AdminForms
         private System.Windows.Forms.NumericUpDown stockUpDown;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label totalPriceLabel;
+        private System.Windows.Forms.Button makeDocumentButton;
     }
 }
