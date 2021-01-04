@@ -127,6 +127,19 @@
     <Compile Include="AdminForms\EditDrugForm.Designer.cs">
       <DependentUpon>EditDrugForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminForms\EditSubstanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\EditSubstanceForm.Designer.cs">
+      <DependentUpon>EditSubstanceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminForms\SubstancesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\SubstancesForm.Designer.cs">
+      <DependentUpon>SubstancesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderFieldItem.cs" />
     <Compile Include="pharmacyDataSet.cs">
       <DependentUpon>pharmacyDataSet.xsd</DependentUpon>
     </Compile>
@@ -188,8 +201,14 @@
     <EmbeddedResource Include="AdminForms\EditDrugForm.resx">
       <DependentUpon>EditDrugForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\EditSubstanceForm.resx">
+      <DependentUpon>EditSubstanceForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\PurchaseListForm.resx">
       <DependentUpon>PurchaseListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\SubstancesForm.resx">
+      <DependentUpon>SubstancesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerCheckReport.rdlc" />
     <EmbeddedResource Include="SellerForms\EditSaleForm.resx">

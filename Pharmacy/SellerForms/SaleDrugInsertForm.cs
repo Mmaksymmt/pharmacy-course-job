@@ -381,18 +381,5 @@ namespace Pharmacy
             }
         }
         #endregion
-
-
-        private class OrderFieldItem
-        {
-            public string FieldName { get; set; }
-            public string Pseudonym { get; set; }
-
-            public OrderFieldItem(string fieldName, string pseudonym)
-            {
-                FieldName = fieldName;
-                Pseudonym = pseudonym;
-            }
-        }
     }
 }

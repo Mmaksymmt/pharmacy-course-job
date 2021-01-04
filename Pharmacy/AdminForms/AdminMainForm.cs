@@ -28,6 +28,7 @@ namespace Pharmacy.AdminForms
             FillCategories();
             FillOrderingFields();
             categoryFilterComboBox.SelectedItem = null;
+            
             drugsGridView.Columns[0].HeaderText = "ID ліків";
             drugsGridView.Columns[1].HeaderText = "Назва";
             drugsGridView.Columns[2].HeaderText = "Категорія";
@@ -336,19 +337,14 @@ namespace Pharmacy.AdminForms
             FillDrugs();
             FillSubstances();
         }
-        #endregion
 
 
-        private class OrderFieldItem
+        private void OpenSubstListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            public string FieldName { get; set; }
-            public string Pseudonym { get; set; }
-
-            public OrderFieldItem(string fieldName, string pseudonym)
-            {
-                FieldName = fieldName;
-                Pseudonym = pseudonym;
-            }
+            SubstancesForm form = new SubstancesForm();
+            form.ShowDialog();
+            FillSubstances();
         }
+        #endregion
     }
 }
