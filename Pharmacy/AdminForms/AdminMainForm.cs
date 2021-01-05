@@ -359,6 +359,13 @@ namespace Pharmacy.AdminForms
             SellersForm form = new SellersForm();
             form.ShowDialog();
         }
+
+
+        private void DrugsStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DrugsStatisticsForm form = new DrugsStatisticsForm();
+            form.Show();
+        }
         #endregion
     }
 }

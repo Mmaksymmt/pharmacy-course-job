@@ -127,6 +127,12 @@
     <Compile Include="AdminForms\CategoriesForm.Designer.cs">
       <DependentUpon>CategoriesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminForms\DrugsStatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\DrugsStatisticsForm.Designer.cs">
+      <DependentUpon>DrugsStatisticsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForms\DrugsToBuyReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\CategoriesForm.resx">
       <DependentUpon>CategoriesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\DrugsStatisticsForm.resx">
+      <DependentUpon>DrugsStatisticsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\DrugsToBuyReportForm.resx">
       <DependentUpon>DrugsToBuyReportForm.cs</DependentUpon>
