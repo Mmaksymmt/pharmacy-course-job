@@ -80,6 +80,7 @@ namespace Pharmacy.AdminForms
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.sellersTableAdapter1 = new Pharmacy.pharmacyDataSetTableAdapters.sellersTableAdapter();
+            this.statisticsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sellersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pharmacyDataSet1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -123,6 +124,7 @@ namespace Pharmacy.AdminForms
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.statisticsButton);
             this.panel1.Controls.Add(this.deleteSellerButton);
             this.panel1.Controls.Add(this.addSellerButton);
             this.panel1.Controls.Add(this.editSellerButton);
@@ -582,6 +584,16 @@ namespace Pharmacy.AdminForms
             // 
             this.sellersTableAdapter1.ClearBeforeFill = true;
             // 
+            // statisticsButton
+            // 
+            this.statisticsButton.Location = new System.Drawing.Point(119, 62);
+            this.statisticsButton.Name = "statisticsButton";
+            this.statisticsButton.Size = new System.Drawing.Size(96, 35);
+            this.statisticsButton.TabIndex = 29;
+            this.statisticsButton.Text = "Статистика";
+            this.statisticsButton.UseVisualStyleBackColor = true;
+            this.statisticsButton.Click += new System.EventHandler(this.StatisticsButton_Click);
+            // 
             // SellersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -658,5 +670,6 @@ namespace Pharmacy.AdminForms
         private System.Windows.Forms.DataGridViewTextBoxColumn sellerpasswordDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn selleradminDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sellerdismissaldateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button statisticsButton;
     }
 }

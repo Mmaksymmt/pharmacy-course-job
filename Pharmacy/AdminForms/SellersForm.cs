@@ -246,5 +246,19 @@ namespace Pharmacy.AdminForms
             sellersTableAdapter1.Update(pharmacyDataSet1.sellers);
             FillSellers();
         }
+
+
+        private void StatisticsButton_Click(object sender, EventArgs e)
+        {
+            DataRow selected = GetSelectedRow();
+            if (selected == null)
+            {
+                return;
+            }
+
+            SellerStatisticsForm form =
+                new SellerStatisticsForm(selected);
+            form.Show();
+        }
     }
 }
