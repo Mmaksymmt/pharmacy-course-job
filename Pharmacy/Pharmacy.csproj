@@ -145,11 +145,23 @@
     <Compile Include="AdminForms\EditDrugForm.Designer.cs">
       <DependentUpon>EditDrugForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminForms\EditSellerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\EditSellerForm.Designer.cs">
+      <DependentUpon>EditSellerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForms\EditSubstanceForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdminForms\EditSubstanceForm.Designer.cs">
       <DependentUpon>EditSubstanceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminForms\SellersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\SellersForm.Designer.cs">
+      <DependentUpon>SellersForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AdminForms\SubstancesForm.cs">
       <SubType>Form</SubType>
@@ -228,11 +240,17 @@
     <EmbeddedResource Include="AdminForms\EditDrugForm.resx">
       <DependentUpon>EditDrugForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\EditSellerForm.resx">
+      <DependentUpon>EditSellerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\EditSubstanceForm.resx">
       <DependentUpon>EditSubstanceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\PurchaseListForm.resx">
       <DependentUpon>PurchaseListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\SellersForm.resx">
+      <DependentUpon>SellersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\SubstancesForm.resx">
       <DependentUpon>SubstancesForm.cs</DependentUpon>

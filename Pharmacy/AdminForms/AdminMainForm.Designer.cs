@@ -41,6 +41,8 @@
             this.purchaseListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.речовиниToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSubstListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.категоріїЛіківToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.categoriesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.drugsGridView = new System.Windows.Forms.DataGridView();
             this.drugsTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -71,8 +73,8 @@
             this.editDrugButton = new System.Windows.Forms.Button();
             this.addDrugButton = new System.Windows.Forms.Button();
             this.deleteDrugButton = new System.Windows.Forms.Button();
-            this.категоріїЛіківToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.categoriesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.персоналToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sellersListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsTableBindingSource)).BeginInit();
@@ -89,7 +91,8 @@
             this.файлToolStripMenuItem,
             this.лекарстваToolStripMenuItem,
             this.речовиниToolStripMenuItem,
-            this.категоріїЛіківToolStripMenuItem});
+            this.категоріїЛіківToolStripMenuItem,
+            this.персоналToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(958, 24);
@@ -173,9 +176,24 @@
             // openSubstListToolStripMenuItem
             // 
             this.openSubstListToolStripMenuItem.Name = "openSubstListToolStripMenuItem";
-            this.openSubstListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openSubstListToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.openSubstListToolStripMenuItem.Text = "Список речовин";
             this.openSubstListToolStripMenuItem.Click += new System.EventHandler(this.OpenSubstListToolStripMenuItem_Click);
+            // 
+            // категоріїЛіківToolStripMenuItem
+            // 
+            this.категоріїЛіківToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.categoriesListToolStripMenuItem});
+            this.категоріїЛіківToolStripMenuItem.Name = "категоріїЛіківToolStripMenuItem";
+            this.категоріїЛіківToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.категоріїЛіківToolStripMenuItem.Text = "Категорії ліків";
+            // 
+            // categoriesListToolStripMenuItem
+            // 
+            this.categoriesListToolStripMenuItem.Name = "categoriesListToolStripMenuItem";
+            this.categoriesListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.categoriesListToolStripMenuItem.Text = "Список категорій";
+            this.categoriesListToolStripMenuItem.Click += new System.EventHandler(this.CategoriesListToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -452,20 +470,20 @@
             this.deleteDrugButton.UseVisualStyleBackColor = true;
             this.deleteDrugButton.Click += new System.EventHandler(this.DeleteDrugsToolStripMenuItem_Click);
             // 
-            // категоріїЛіківToolStripMenuItem
+            // персоналToolStripMenuItem
             // 
-            this.категоріїЛіківToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.categoriesListToolStripMenuItem});
-            this.категоріїЛіківToolStripMenuItem.Name = "категоріїЛіківToolStripMenuItem";
-            this.категоріїЛіківToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.категоріїЛіківToolStripMenuItem.Text = "Категорії ліків";
+            this.персоналToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sellersListToolStripMenuItem});
+            this.персоналToolStripMenuItem.Name = "персоналToolStripMenuItem";
+            this.персоналToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.персоналToolStripMenuItem.Text = "Персонал";
             // 
-            // categoriesListToolStripMenuItem
+            // sellersListToolStripMenuItem
             // 
-            this.categoriesListToolStripMenuItem.Name = "categoriesListToolStripMenuItem";
-            this.categoriesListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.categoriesListToolStripMenuItem.Text = "Список категорій";
-            this.categoriesListToolStripMenuItem.Click += new System.EventHandler(this.CategoriesListToolStripMenuItem_Click);
+            this.sellersListToolStripMenuItem.Name = "sellersListToolStripMenuItem";
+            this.sellersListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sellersListToolStripMenuItem.Text = "Список персоналу";
+            this.sellersListToolStripMenuItem.Click += new System.EventHandler(this.SellersListToolStripMenuItem_Click);
             // 
             // AdminMainForm
             // 
@@ -547,5 +565,7 @@
         private System.Windows.Forms.ToolStripMenuItem openSubstListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem категоріїЛіківToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem categoriesListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem персоналToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sellersListToolStripMenuItem;
     }
 }

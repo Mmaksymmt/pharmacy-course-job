@@ -25,7 +25,7 @@ namespace Pharmacy.AdminForms
             connection_ = new MySqlConnection(
                 Properties.Settings.Default.pharmacyConnectionString);
             FillOrderingFields();
-            Fillcategoriesances();
+            FillCategories();
 
             foreach (var col in categoriesGridView.Columns)
             {
@@ -51,7 +51,7 @@ namespace Pharmacy.AdminForms
         }
 
 
-        private void Fillcategoriesances()
+        private void FillCategories()
         {
             MySqlCommand command = new MySqlCommand() { Connection = connection_ };
             string orderField = (orderByComboBox.SelectedItem as OrderFieldItem).FieldName;
@@ -105,19 +105,19 @@ namespace Pharmacy.AdminForms
 
         private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Fillcategoriesances();
+            FillCategories();
         }
 
 
         private void DescendingCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            Fillcategoriesances();
+            FillCategories();
         }
 
 
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            Fillcategoriesances();
+            FillCategories();
         }
 
 
@@ -168,10 +168,9 @@ namespace Pharmacy.AdminForms
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
-                throw;
             }
             connection_.Close();
-            Fillcategoriesances();
+            FillCategories();
         }
 
 
@@ -186,7 +185,7 @@ namespace Pharmacy.AdminForms
             EditCategoryForm form =
                 new EditCategoryForm(selected);
             form.ShowDialog();
-            Fillcategoriesances();
+            FillCategories();
         }
 
 
@@ -195,7 +194,7 @@ namespace Pharmacy.AdminForms
             EditCategoryForm form =
                 new EditCategoryForm();
             form.ShowDialog();
-            Fillcategoriesances();
+            FillCategories();
         }
     }
 }

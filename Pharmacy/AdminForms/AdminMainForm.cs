@@ -352,6 +352,13 @@ namespace Pharmacy.AdminForms
             CategoriesForm form = new CategoriesForm();
             form.ShowDialog();
         }
+
+
+        private void SellersListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SellersForm form = new SellersForm();
+            form.ShowDialog();
+        }
         #endregion
     }
 }
