@@ -38,10 +38,6 @@ namespace Pharmacy.AdminForms
             drugsGridView.Columns[6].HeaderText = "За рецептом";
             drugsGridView.Columns[7].HeaderText = "Ціна";
             drugsGridView.Columns[8].HeaderText = "На складі";
-
-            substancesGridView.Columns[0].HeaderText = "Назва речовини";
-            substancesGridView.Columns[1].HeaderText = "Кількість";
-            substancesGridView.Columns[2].HeaderText = "Опис";
         }
 
 
@@ -172,7 +168,6 @@ namespace Pharmacy.AdminForms
         {
             substancesDt_.Rows.Clear();
             DataRow selectedRow = GetSelectedDataRow();
-
             if (selectedRow == null)
             {
                 return;
@@ -181,7 +176,11 @@ namespace Pharmacy.AdminForms
             MySqlConnection connection =
                 new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             int selectedDrugId = Convert.ToInt32(selectedRow["drug_id"]);
-            const string QUERY = "SELECT subst_name, drugsubst_amount, subst_description FROM drugssubstances INNER JOIN substances ON drugssubstances.subst_id = substances.subst_id WHERE drugssubstances.drug_id = @drug_id;";
+            const string QUERY =
+@"SELECT subst_name, drugsubst_amount, subst_description
+FROM drugssubstances
+INNER JOIN substances ON drugssubstances.subst_id = substances.subst_id
+WHERE drugssubstances.drug_id = @drug_id;";
             MySqlCommand command = new MySqlCommand(QUERY, connection);
             command.Parameters.AddWithValue("drug_id", selectedDrugId);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -195,6 +194,10 @@ namespace Pharmacy.AdminForms
                 MessageBox.Show($"Substances Error: {ex.Message}");
                 throw;
             }
+
+            substancesGridView.Columns[0].HeaderText = "Назва речовини";
+            substancesGridView.Columns[1].HeaderText = "Кількість";
+            substancesGridView.Columns[2].HeaderText = "Опис";
         }
 
 
@@ -364,6 +367,13 @@ namespace Pharmacy.AdminForms
         private void DrugsStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DrugsStatisticsForm form = new DrugsStatisticsForm();
+            form.Show();
+        }
+
+
+        private void SalesStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SalesStatisticsForm form = new SalesStatisticsForm();
             form.Show();
         }
         #endregion

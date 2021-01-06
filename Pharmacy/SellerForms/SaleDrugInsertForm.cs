@@ -42,10 +42,6 @@ namespace Pharmacy
             drugsGridView.Columns[6].HeaderText = "За рецептом";
             drugsGridView.Columns[7].HeaderText = "Ціна";
             drugsGridView.Columns[8].HeaderText = "На складі";
-
-            substancesGridView.Columns[0].HeaderText = "Речовина";
-            substancesGridView.Columns[1].HeaderText = "Вміст";
-            substancesGridView.Columns[2].HeaderText = "Опис";
         }
 
 
@@ -224,6 +220,10 @@ namespace Pharmacy
                 MessageBox.Show($"Substances Error: {ex.Message}");
                 throw;
             }
+
+            substancesGridView.Columns[0].HeaderText = "Речовина";
+            substancesGridView.Columns[1].HeaderText = "Вміст";
+            substancesGridView.Columns[2].HeaderText = "Опис";
         }
 
 

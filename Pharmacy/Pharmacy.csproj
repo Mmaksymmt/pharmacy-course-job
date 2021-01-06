@@ -163,6 +163,12 @@
     <Compile Include="AdminForms\EditSubstanceForm.Designer.cs">
       <DependentUpon>EditSubstanceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminForms\SalesStatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminForms\SalesStatisticsForm.Designer.cs">
+      <DependentUpon>SalesStatisticsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminForms\SellersForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\PurchaseListForm.resx">
       <DependentUpon>PurchaseListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminForms\SalesStatisticsForm.resx">
+      <DependentUpon>SalesStatisticsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForms\SellersForm.resx">
       <DependentUpon>SellersForm.cs</DependentUpon>

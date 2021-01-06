@@ -39,6 +39,7 @@
             this.deleteDrugsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.purchaseListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drugsStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.речовиниToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSubstListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.категоріїЛіківToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,7 +76,8 @@
             this.editDrugButton = new System.Windows.Forms.Button();
             this.addDrugButton = new System.Windows.Forms.Button();
             this.deleteDrugButton = new System.Windows.Forms.Button();
-            this.drugsStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.продажіToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drugsGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drugsTableBindingSource)).BeginInit();
@@ -93,7 +95,8 @@
             this.лекарстваToolStripMenuItem,
             this.речовиниToolStripMenuItem,
             this.категоріїЛіківToolStripMenuItem,
-            this.персоналToolStripMenuItem});
+            this.персоналToolStripMenuItem,
+            this.продажіToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(958, 24);
@@ -137,35 +140,42 @@
             // addDrugToolStripMenuItem
             // 
             this.addDrugToolStripMenuItem.Name = "addDrugToolStripMenuItem";
-            this.addDrugToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addDrugToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.addDrugToolStripMenuItem.Text = "Додати";
             this.addDrugToolStripMenuItem.Click += new System.EventHandler(this.AddDrugToolStripMenuItem_Click);
             // 
             // editDrugToolStripMenuItem
             // 
             this.editDrugToolStripMenuItem.Name = "editDrugToolStripMenuItem";
-            this.editDrugToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editDrugToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.editDrugToolStripMenuItem.Text = "Редагувати";
             this.editDrugToolStripMenuItem.Click += new System.EventHandler(this.EditDrugToolStripMenuItem_Click);
             // 
             // deleteDrugsToolStripMenuItem
             // 
             this.deleteDrugsToolStripMenuItem.Name = "deleteDrugsToolStripMenuItem";
-            this.deleteDrugsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteDrugsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.deleteDrugsToolStripMenuItem.Text = "Видалити";
             this.deleteDrugsToolStripMenuItem.Click += new System.EventHandler(this.DeleteDrugsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(158, 6);
             // 
             // purchaseListToolStripMenuItem
             // 
             this.purchaseListToolStripMenuItem.Name = "purchaseListToolStripMenuItem";
-            this.purchaseListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.purchaseListToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.purchaseListToolStripMenuItem.Text = "Список закупки";
             this.purchaseListToolStripMenuItem.Click += new System.EventHandler(this.PurchaseListToolStripMenuItem_Click);
+            // 
+            // drugsStatisticsToolStripMenuItem
+            // 
+            this.drugsStatisticsToolStripMenuItem.Name = "drugsStatisticsToolStripMenuItem";
+            this.drugsStatisticsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.drugsStatisticsToolStripMenuItem.Text = "Статистика";
+            this.drugsStatisticsToolStripMenuItem.Click += new System.EventHandler(this.DrugsStatisticsToolStripMenuItem_Click);
             // 
             // речовиниToolStripMenuItem
             // 
@@ -487,12 +497,20 @@
             this.deleteDrugButton.UseVisualStyleBackColor = true;
             this.deleteDrugButton.Click += new System.EventHandler(this.DeleteDrugsToolStripMenuItem_Click);
             // 
-            // drugsStatisticsToolStripMenuItem
+            // продажіToolStripMenuItem
             // 
-            this.drugsStatisticsToolStripMenuItem.Name = "drugsStatisticsToolStripMenuItem";
-            this.drugsStatisticsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.drugsStatisticsToolStripMenuItem.Text = "Статистика";
-            this.drugsStatisticsToolStripMenuItem.Click += new System.EventHandler(this.DrugsStatisticsToolStripMenuItem_Click);
+            this.продажіToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salesStatisticsToolStripMenuItem});
+            this.продажіToolStripMenuItem.Name = "продажіToolStripMenuItem";
+            this.продажіToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.продажіToolStripMenuItem.Text = "Продажі";
+            // 
+            // salesStatisticsToolStripMenuItem
+            // 
+            this.salesStatisticsToolStripMenuItem.Name = "salesStatisticsToolStripMenuItem";
+            this.salesStatisticsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salesStatisticsToolStripMenuItem.Text = "Статистика";
+            this.salesStatisticsToolStripMenuItem.Click += new System.EventHandler(this.SalesStatisticsToolStripMenuItem_Click);
             // 
             // AdminMainForm
             // 
@@ -577,5 +595,7 @@
         private System.Windows.Forms.ToolStripMenuItem персоналToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sellersListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem drugsStatisticsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem продажіToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesStatisticsToolStripMenuItem;
     }
 }
