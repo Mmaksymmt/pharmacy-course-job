@@ -74,11 +74,12 @@ namespace Pharmacy
 
         private void CreateAdapter()
         {
-            const string FILL_TABLE_QUERY = "SELECT salesdrugs.drug_id, drug_name, " +
-                "salesdrugs_amount, salesdrugs_price, " +
-                "salesdrugs_price * salesdrugs_amount AS sum_price " +
-                "FROM salesdrugs INNER JOIN drugs WHERE " +
-                "sale_id=@sale_id AND drugs.drug_id=salesdrugs.drug_id;";
+            const string FILL_TABLE_QUERY =
+                @"SELECT salesdrugs.drug_id, drug_name, 
+                salesdrugs_amount, salesdrugs_price, 
+                salesdrugs_price * salesdrugs_amount AS sum_price
+                FROM salesdrugs INNER JOIN drugs WHERE
+                sale_id=@sale_id AND drugs.drug_id=salesdrugs.drug_id;";
             MySqlCommand fillTableCommand = new MySqlCommand(FILL_TABLE_QUERY, connection_);
             fillTableCommand.Parameters.AddWithValue("@sale_id", currentSaleId_);
             salesDrugsAdapter = new MySqlDataAdapter(fillTableCommand);
@@ -86,8 +87,8 @@ namespace Pharmacy
             // DELETE command
 
             const string DELETE_QUERY =
-                "DELETE FROM salesdrugs " +
-                "WHERE sale_id = @sale_id AND drug_id = @drug_id"; ;
+                @"DELETE FROM salesdrugs 
+                WHERE sale_id = @sale_id AND drug_id = @drug_id";
             MySqlCommand deleteCommand = new MySqlCommand(DELETE_QUERY, connection_);
             deleteCommand.Parameters.AddWithValue("@sale_id", currentSaleId_);
             var param = 
@@ -100,9 +101,10 @@ namespace Pharmacy
         private void InsertSale()
         {
             string query =
-                $"INSERT INTO sales (sale_seller_id) VALUES ({sellerId_});" +
-                "SELECT LAST_INSERT_ID();";
+                @"INSERT INTO sales (sale_seller_id) VALUES (@seller_id);
+                SELECT LAST_INSERT_ID();";
             MySqlCommand command = new MySqlCommand(query, connection_);
+            command.Parameters.AddWithValue("@seller_id", sellerId_);
             MySqlDataReader reader;
 
             try
@@ -160,8 +162,9 @@ namespace Pharmacy
 
         private void DeleteCurrentSale()
         {
-            string query = $"DELETE FROM sales WHERE sale_id = {currentSaleId_};";
+            string query = "DELETE FROM sales WHERE sale_id = @sale_id;";
             MySqlCommand command = new MySqlCommand(query, connection_);
+            command.Parameters.AddWithValue("@sale_id", currentSaleId_);
 
             try
             {

@@ -37,9 +37,9 @@ namespace Pharmacy.SellerForms
         private void CreateAdapter()
         {
             const string QUERY =
-                "SELECT * FROM salesdrugs INNER JOIN drugs ON " +
-                "drugs.drug_id=salesdrugs.drug_id WHERE salesdrugs.sale_id=@sale_id " +
-                "AND salesdrugs.drug_id=@drug_id;";
+                @"SELECT * FROM salesdrugs INNER JOIN drugs ON 
+                drugs.drug_id=salesdrugs.drug_id WHERE salesdrugs.sale_id=@sale_id 
+                AND salesdrugs.drug_id=@drug_id;";
             MySqlCommand command = new MySqlCommand(QUERY, connection_);
             command.Parameters.AddWithValue("@sale_id", saleId_);
             command.Parameters.AddWithValue("@drug_id", drugId_);
@@ -47,8 +47,8 @@ namespace Pharmacy.SellerForms
 
             // UPDATE query
             const string UPDATE_QUERY =
-                "UPDATE salesdrugs SET salesdrugs_amount = @sdAmount" +
-                " WHERE sale_id = @sale_id AND drug_id = @drug_id;";
+                @"UPDATE salesdrugs SET salesdrugs_amount = @sdAmount
+                WHERE sale_id = @sale_id AND drug_id = @drug_id;";
             MySqlCommand updateCommand = new MySqlCommand(UPDATE_QUERY, connection_);
             updateCommand.Parameters.AddWithValue("@sale_id", saleId_);
             updateCommand.Parameters.AddWithValue("@drug_id", drugId_);

@@ -38,13 +38,13 @@ namespace Pharmacy
         private void CreateAdapter()
         {
             const string QUERY =
-                "SELECT sales.sale_id, sale_date, " +
-                "SUM(salesdrugs_amount * salesdrugs_price) as price " +
-                "FROM sales LEFT JOIN salesdrugs ON sales.sale_id = salesdrugs.sale_id " +
-                "WHERE sale_seller_id = @sale_seller_id " +
-                "AND DATE(sale_date) = CURRENT_DATE() " +
-                "GROUP BY sales.sale_id, sale_date " +
-                "ORDER BY sale_date DESC;";
+                @"SELECT sales.sale_id, sale_date, 
+                SUM(salesdrugs_amount * salesdrugs_price) as price 
+                FROM sales LEFT JOIN salesdrugs ON sales.sale_id = salesdrugs.sale_id
+                WHERE sale_seller_id = @sale_seller_id 
+                AND DATE(sale_date) = CURRENT_DATE() 
+                GROUP BY sales.sale_id, sale_date 
+                ORDER BY sale_date DESC;";
             MySqlCommand command = new MySqlCommand(QUERY, connection_);
             command.Parameters.AddWithValue("@sale_seller_id", sellerId_);
             adapter_ = new MySqlDataAdapter(command);

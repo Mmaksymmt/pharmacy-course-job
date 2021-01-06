@@ -76,16 +76,16 @@ namespace Pharmacy.AdminForms
             // SELECT query
             MySqlCommand selectCommand = new MySqlCommand() { Connection = connection_ };
             const string SELECT_QUERY =
-                "SELECT subst_id, subst_name, drugsubst_amount " +
-                "FROM drugssubstances NATURAL JOIN substances " +
-                "WHERE drug_id = @drug_id";
+                @"SELECT subst_id, subst_name, drugsubst_amount
+                FROM drugssubstances NATURAL JOIN substances
+                WHERE drug_id = @drug_id";
             selectCommand.CommandText = SELECT_QUERY;
             substAdapter_ = new MySqlDataAdapter(selectCommand);
 
             // INSERT query
             const string INSERT_QUERY =
-                "INSERT INTO drugssubstances (drug_id, subst_id, drugsubst_amount) " +
-                "VALUES (@drug_id, @subst_id, @amount)";
+                @"INSERT INTO drugssubstances (drug_id, subst_id, drugsubst_amount) 
+                VALUES (@drug_id, @subst_id, @amount)";
             substAdapter_.InsertCommand = new MySqlCommand()
             {
                 Connection = connection_,
@@ -98,7 +98,7 @@ namespace Pharmacy.AdminForms
 
             // UPDATE query
             const string UPDATE_QUERY =
-                "UPDATE drugssubstances " +
+                @"UPDATE drugssubstances " +
                 "SET drugsubst_amount = @amount " +
                 "WHERE drug_id = @drug_id AND subst_id = @subst_id";
             substAdapter_.UpdateCommand = new MySqlCommand()
@@ -113,8 +113,8 @@ namespace Pharmacy.AdminForms
 
             // DELETE query
             const string DELETE_QUERY =
-                "DELETE FROM drugssubstances " +
-                "WHERE drug_id = @drug_id AND subst_id = @subst_id";
+                @"DELETE FROM drugssubstances 
+                WHERE drug_id = @drug_id AND subst_id = @subst_id";
             substAdapter_.DeleteCommand = new MySqlCommand()
             {
                 Connection = connection_,

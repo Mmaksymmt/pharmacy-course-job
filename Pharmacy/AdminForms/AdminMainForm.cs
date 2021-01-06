@@ -177,7 +177,8 @@ namespace Pharmacy.AdminForms
                 new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             int selectedDrugId = Convert.ToInt32(selectedRow["drug_id"]);
             const string QUERY =
-@"SELECT subst_name, drugsubst_amount, subst_description
+@"
+SELECT subst_name, drugsubst_amount, subst_description
 FROM drugssubstances
 INNER JOIN substances ON drugssubstances.subst_id = substances.subst_id
 WHERE drugssubstances.drug_id = @drug_id;";

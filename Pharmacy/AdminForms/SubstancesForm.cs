@@ -62,7 +62,7 @@ namespace Pharmacy.AdminForms
             if (idParsed)
             {
                 query =
-                    "SELECT * FROM substances " +
+                    @"SELECT * FROM substances " +
                     "WHERE LOCATE(@subst_name, subst_name) > 0 AND subst_id = @subst_id " +
                     $"ORDER BY {orderField} {orderDirection}";
                 command.Parameters.AddWithValue("@subst_id", substId);

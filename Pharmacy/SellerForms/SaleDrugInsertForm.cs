@@ -203,10 +203,10 @@ namespace Pharmacy
                 new MySqlConnection(Properties.Settings.Default.pharmacyConnectionString);
             int selectedDrugId = Convert.ToInt32(selectedRow["drug_id"]);
             const string QUERY =
-                "SELECT subst_name, drugsubst_amount, subst_description " +
-                "FROM drugssubstances INNER JOIN substances " +
-                "ON drugssubstances.subst_id = substances.subst_id " +
-                "WHERE drugssubstances.drug_id = @drug_id;";
+                @"SELECT subst_name, drugsubst_amount, subst_description 
+                FROM drugssubstances INNER JOIN substances 
+                ON drugssubstances.subst_id = substances.subst_id 
+                WHERE drugssubstances.drug_id = @drug_id;";
             MySqlCommand command = new MySqlCommand(QUERY, connection);
             command.Parameters.AddWithValue("drug_id", selectedDrugId);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -263,11 +263,13 @@ namespace Pharmacy
 
             DataRow selected = GetSelectedDrugRow();
             string query =
-                $"INSERT INTO salesdrugs (sale_id, drug_id, salesdrugs_amount) " +
-                $"VALUES ({currentSaleId_}, {selected["drug_id"]}, {amountNumericUpDown.Value});";
+                @"INSERT INTO salesdrugs (sale_id, drug_id, salesdrugs_amount) 
+                VALUES (@sale_id, @drug_id, @amount);";
 
-            // TODO: replace {} with Sql parameters
             MySqlCommand command = new MySqlCommand(query, connection_);
+            command.Parameters.AddWithValue("@sale_id", currentSaleId_);
+            command.Parameters.AddWithValue("@drug_id", selected["drug_id"]);
+            command.Parameters.AddWithValue("@amount", amountNumericUpDown.Value);
 
             try
             {

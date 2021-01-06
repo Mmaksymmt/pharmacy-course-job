@@ -155,8 +155,8 @@ namespace Pharmacy.AdminForms
 
             int selectedId = Convert.ToInt32(selectedRow["category_id"]);
             const string DEL_QUERY =
-                "DELETE FROM drugcategories " +
-                "WHERE category_id = @category_id";
+@"DELETE FROM drugcategories
+WHERE category_id = @category_id";
             MySqlCommand delCommand = new MySqlCommand(DEL_QUERY, connection_);
             delCommand.Parameters.AddWithValue("category_id", selectedId);
 

@@ -39,9 +39,9 @@ namespace Pharmacy
             }
 
             const string QUERY =
-                "SELECT seller_id, seller_password, seller_admin " +
-                "FROM Sellers WHERE seller_id=@seller_id AND " +
-                "seller_password = @seller_password";
+                @"SELECT seller_id, seller_password, seller_admin 
+                FROM Sellers WHERE seller_id=@seller_id AND 
+                seller_password = @seller_password";
             MySqlCommand command = new MySqlCommand(QUERY, connection_);
             command.Parameters.AddWithValue("@seller_id", id);
             command.Parameters.AddWithValue("@seller_password", passw);
