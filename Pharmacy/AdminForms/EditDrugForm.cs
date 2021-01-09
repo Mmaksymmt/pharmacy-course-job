@@ -215,8 +215,12 @@ namespace Pharmacy.AdminForms
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            if (!CheckInput())
+            {
+                return;
+            }
+
             drugsTableAdapter1.Fill(pharmacyDataSet1.drugs);
-            
             if (currentDrugId_ == -1)
             {
                 CreateNewDrug();
@@ -225,7 +229,6 @@ namespace Pharmacy.AdminForms
             {
                 SetExistingDrug();
             }
-
             try
             {
                 drugsTableAdapter1.Update(pharmacyDataSet1.drugs);
@@ -249,6 +252,32 @@ namespace Pharmacy.AdminForms
             }
             
             Close();
+        }
+
+
+        private bool CheckInput()
+        {
+            try
+            {
+                if (nameTextBox.TextLength == 0)
+                {
+                    throw new Exception("Введіть назву ліків");
+                }
+                if (formTextBox.TextLength == 0)
+                {
+                    throw new Exception("Введіть форму випуску ліків");
+                }
+                if (manufacturerTextBox.TextLength == 0)
+                {
+                    throw new Exception("Введіть виробника ліків");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+                return false;
+            }
+            return true;
         }
 
 

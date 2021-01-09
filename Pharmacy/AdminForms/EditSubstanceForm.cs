@@ -34,6 +34,11 @@ namespace Pharmacy.AdminForms
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            if (!CheckInput())
+            {
+                return;
+            }
+
             try
             {
                 if (substId_ == -1)
@@ -56,6 +61,17 @@ namespace Pharmacy.AdminForms
                 throw;
             }
             Close();
+        }
+
+
+        private bool CheckInput()
+        {
+            if (nameTextBox.TextLength == 0)
+            {
+                MessageBox.Show("Введіть назву речовини");
+                return false;
+            }
+            return true;
         }
     }
 }

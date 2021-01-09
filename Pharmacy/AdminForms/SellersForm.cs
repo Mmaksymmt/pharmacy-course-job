@@ -216,9 +216,17 @@ namespace Pharmacy.AdminForms
                 return;
             }
 
-            selected.Delete();
-            sellersTableAdapter1.Update(pharmacyDataSet1.sellers);
-            FillSellers();
+            try
+            {
+                selected.Delete();
+                sellersTableAdapter1.Update(pharmacyDataSet1.sellers);
+                FillSellers();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не вдалося видалити працівника");
+                FillSellers();
+            }
         }
 
 

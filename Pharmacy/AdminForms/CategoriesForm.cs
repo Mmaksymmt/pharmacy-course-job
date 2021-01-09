@@ -167,7 +167,7 @@ WHERE category_id = @category_id";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
+                MessageBox.Show("Не вдалося видалити категорію ліків");
             }
             connection_.Close();
             FillCategories();

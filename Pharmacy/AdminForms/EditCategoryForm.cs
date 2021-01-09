@@ -36,6 +36,12 @@ namespace Pharmacy.AdminForms
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            if (nameTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("Введіть назву категорії!");
+                return;
+            }
+
             try
             {
                 if (categoryId_ == -1)

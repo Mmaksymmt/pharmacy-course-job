@@ -69,6 +69,11 @@ namespace Pharmacy.AdminForms
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            if (!CheckInput())
+            {
+                return;
+            }
+
             DateTime? dismissalDate = null;
             if (dismissalCheckBox.Checked)
             {
@@ -102,6 +107,55 @@ namespace Pharmacy.AdminForms
                     seller_.Field<int>("seller_id"));
             }
             Close();
+        }
+
+
+        private bool CheckInput()
+        {
+            try
+            {
+                if (nameTextBox.TextLength == 0 || surnameTextBox.TextLength == 0 ||
+                    patronymTextBox.TextLength == 0)
+                {
+                    throw new Exception(
+                        @"Поля ""ім'я"", ""прізвище"" та ""по-батькові"" повинні бути заповненими");
+                }
+                if (!nameTextBox.Text.All(ch => char.IsLetter(ch)) ||
+                    !surnameTextBox.Text.All(ch => char.IsLetter(ch)) ||
+                    !patronymTextBox.Text.All(ch => char.IsLetter(ch)))
+                {
+                    throw new Exception(
+                        @"Поля ""ім'я"", ""прізвище"" та ""по-батькові"" повинні містити тільки букви");
+                }
+                if (birthdatePicker.Value > DateTime.Today)
+                {
+                    throw new Exception(
+                        "Неправильна дата народження");
+                }
+                if (hiredatePicker.Value < birthdatePicker.Value)
+                {
+                    throw new Exception(
+                        "Неправильна дата найму");
+                }
+                if (dismissalCheckBox.Checked &&
+                    dismissalDatePicker.Value > hiredatePicker.Value)
+                {
+                    throw new Exception(
+                        "Неправильна дата звільнення");
+                }
+                const int PASSWORD_MIN_LENGTH = 1;
+                if (passwordTextBox.TextLength < PASSWORD_MIN_LENGTH)
+                {
+                    throw new Exception(
+                        $"Пароль повинен містити не менше {PASSWORD_MIN_LENGTH} знаків");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            return true;
         }
     }
 }

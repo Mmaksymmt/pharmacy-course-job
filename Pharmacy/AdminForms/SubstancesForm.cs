@@ -164,8 +164,7 @@ namespace Pharmacy.AdminForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
-                throw;
+                MessageBox.Show("Не вдалося видалити речовину");
             }
             connection_.Close();
             FillSubstances();
